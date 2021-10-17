@@ -1,0 +1,137 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "ESLint/stylelint Target",
+  "description": "ESLint/stylelint target options for Build Facade.",
+  "type": "object",
+  "properties": {
+    "eslintFilePatterns": {
+      "type": "array",
+      "description": "One or more files/dirs/globs to pass directly to ESLint's lintFiles() method. i.e. [\"src/**/*.ts\"]",
+      "default": [],
+      "items": {
+        "type": "string"
+      }
+    },
+    "eslintConfig": {
+      "type": "string",
+      "description": "Use this configuration, overriding .eslintrc.* config options if present"
+    },
+    "stylelintFilePatterns": {
+      "type": "array",
+      "description": "One or more files/dirs/globs to pass directly to stylelint's lint() method. [\"src/**/*.scss\"]",
+      "default": [],
+      "items": {
+        "type": "string"
+      }
+    },
+    "stylelintConfig": {
+      "type": "string",
+      "description": "Path to the stylelint configuration file"
+    },
+    "fix": {
+      "type": "boolean",
+      "description": "Automatically fix, where possible, violations reported by rules (may overwrite linted files)",
+      "default": false
+    },
+    "eslintCache": {
+      "type": "boolean",
+      "description": "Store the results of processed files so that ESLint only operates on the changed ones",
+      "default": false
+    },
+    "stylelintCache": {
+      "type": "boolean",
+      "description": "Store the results of processed files so that stylelint only operates on the changed ones",
+      "default": false
+    },
+    "eslintCacheLocation": {
+      "type": "string",
+      "description": "Path to the cache file or directory"
+    },
+    "stylelintCacheLocation": {
+      "type": "string",
+      "description": "Path to the cache file or directory"
+    },
+    "eslintCacheStrategy": {
+      "type": "string",
+      "description": "Strategy to use for detecting changed files in the cache. Can be either metadata or content",
+      "default": "metadata",
+      "enum": ["metadata", "content"]
+    },
+    "eslintIgnorePath": {
+      "type": "string",
+      "description": "A path to a file containing patterns describing files to ignore instead of $CWD/.eslintignore"
+    },
+    "stylelintIgnorePath": {
+      "type": "string",
+      "description": "A path to a file containing patterns describing files to ignore instead of $CWD/.stylelintignore"
+    },
+    "eslintRulesDir": {
+      "type": "array",
+      "description": "This option allows you to specify another directory from which to load rules files",
+      "default": [],
+      "items": {
+        "type": "string"
+      }
+    },
+    "eslintResolvePluginsRelativeTo": {
+      "type": "string",
+      "description": "Changes the folder where plugins are resolved from"
+    },
+    "outputFile": {
+      "type": "string",
+      "description": "File to write report to instead of the console"
+    },
+    "format": {
+      "type": "string",
+      "description": "The output is formatted by using the ESLint Output formatter (https://eslint.org/docs/user-guide/formatters).",
+      "default": "stylish",
+      "anyOf": [
+        {
+          "enum": [
+            "stylish",
+            "compact",
+            "codeframe",
+            "unix",
+            "visualstudio",
+            "checkstyle",
+            "html",
+            "jslint-xml",
+            "json",
+            "json-with-metadata",
+            "junit",
+            "tap"
+          ]
+        },
+        { "minLength": 1 }
+      ]
+    },
+    "silent": {
+      "type": "boolean",
+      "description": "Hide output text",
+      "default": false
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Only register violations for rules with an \"error\"-level severity (ignore \"warning\"-level)",
+      "default": false
+    },
+    "maxWarnings": {
+      "type": "number",
+      "description": "Number of warnings to trigger nonzero exit code.",
+      "default": -1
+    },
+    "force": {
+      "type": "boolean",
+      "description": "Succeeds even if there was linting errors.",
+      "default": false
+    },
+
+    "noEslintrc": {
+      "type": "boolean",
+      "description": "Disables use of configuration from .eslintrc.* and package.json files",
+      "default": false
+    }
+  },
+  "additionalProperties": false,
+  "required": ["eslintFilePatterns", "stylelintFilePatterns"]
+}

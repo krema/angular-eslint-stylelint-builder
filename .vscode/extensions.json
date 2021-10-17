@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "bitsplease.bits-please-essentials",
+    "esbenp.prettier-vscode",
+    "stylelint.vscode-stylelint",
+    "dbaeumer.vscode-eslint"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "name": "@krema/angular-eslint-stylelint-builder",
+  "description": "Angular CLI builder for ESLint and stylelint",
+  "author": "André Kremser",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/krema/angular-eslint-stylelint-builder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/krema/angular-eslint-stylelint-builder/issues"
+  },
+  "keywords": [
+    "angular",
+    "builder",
+    "eslint",
+    "stylelint"
+  ],
+  "builders": "./builders.json",
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "builders.json"
+  ],
+  "dependencies": {
+    "@angular-devkit/architect": "^0.1201.1",
+    "@angular-devkit/core": "^12.2.10"
+  },
+  "peerDependencies": {
+    "@angular/cli": ">= 12.0.0 < 13.0.0",
+    "eslint": "*",
+    "stylelint": "*",
+    "typescript": "*"
+  }
+}
