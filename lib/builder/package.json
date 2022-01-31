@@ -24,7 +24,7 @@
     "builders.json"
   ],
   "dependencies": {
-    "@angular-devkit/architect": "^0.1202.11",
+    "@angular-devkit/architect": "^0.1302.0",
     "@angular-devkit/core": "^12.2.11"
   },
   "peerDependencies": {

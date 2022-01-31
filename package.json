@@ -21,7 +21,7 @@
     "watch": "npm-watch"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "^0.1202.11",
+    "@angular-devkit/architect": "^0.1302.0",
     "@angular-devkit/core": "^12.2.11",
     "@types/node": "^16.11.4",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
