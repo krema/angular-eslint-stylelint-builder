@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@angular-devkit/architect": "^0.1202.11",
-    "@angular-devkit/core": "^12.2.11",
+    "@angular-devkit/core": "^13.3.2",
     "@types/node": "^16.11.4",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
