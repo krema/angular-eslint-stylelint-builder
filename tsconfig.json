@@ -30,5 +30,5 @@
     "types": ["node"]
   },
   "include": ["lib/**/*"],
-  "exclude": ["**/*.spec.ts"]
+  "exclude": ["lib/**/*.spec.ts"]
 }
