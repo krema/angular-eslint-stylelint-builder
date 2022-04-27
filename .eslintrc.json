@@ -4,7 +4,7 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "plugins": ["@typescript-eslint", "ts-exports"],
+  "plugins": ["@typescript-eslint"],
   "env": {
     "node": true
   },
@@ -18,7 +18,6 @@
         "argsIgnorePattern": "_"
       }
     ],
-    "@typescript-eslint/array-type": "error",
-    "ts-exports/unused-exports": "off"
+    "@typescript-eslint/array-type": "error"
   }
 }
