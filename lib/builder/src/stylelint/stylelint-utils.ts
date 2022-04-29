@@ -1,10 +1,11 @@
 import type { ESLint } from 'eslint';
-import type { StylelintPublicAPI, StylelintStandaloneReturnValue } from './stylelint';
+import type { LinterResult, PublicApi } from 'stylelint'
 
-export async function loadStylelint(): Promise<StylelintPublicAPI> {
-  let stylelint: PromiseLike<StylelintPublicAPI>;
+export async function loadStylelint(): Promise<PublicApi> {
+  let stylelint: PromiseLike<PublicApi>
 
   try {
+    // @ts-ignore
     stylelint = await import('stylelint');
     return stylelint;
   } catch {
@@ -12,7 +13,7 @@ export async function loadStylelint(): Promise<StylelintPublicAPI> {
   }
 }
 
-export function convertToLintResult(stylelintResults: StylelintStandaloneReturnValue): ESLint.LintResult[] {
+export function convertToLintResult(stylelintResults: LinterResult): ESLint.LintResult[] {
   return stylelintResults.results.map(
     x =>
       ({

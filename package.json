@@ -9,7 +9,9 @@
   ],
   "watch": {
     "build": {
-      "patterns": ["lib"],
+      "patterns": [
+        "lib"
+      ],
       "extensions": "ts"
     }
   },
@@ -20,9 +22,15 @@
     "clean": "rm -rf out",
     "watch": "npm-watch"
   },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": "^6.11.0 || ^7.5.6",
+    "yarn": ">= 1.13.0"
+  },
   "devDependencies": {
     "@angular-devkit/architect": "^0.1303.3",
     "@angular-devkit/core": "^13.3.3",
+    "@types/jest": "^27.4.1",
     "@types/node": "^16.11.31",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
@@ -33,9 +41,11 @@
     "eslint-plugin-prefer-arrow": "^1.2.3",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-unused-imports": "^1.1.5",
+    "jest": "^27.0.0",
     "npm-watch": "^0.11.0",
     "prettier": "^2.6.2",
-    "stylelint": "^13.13.1",
+    "stylelint": "^14.8.1",
+    "ts-jest": "^27.1.4",
     "typescript": "^4.3.5"
   }
 }
