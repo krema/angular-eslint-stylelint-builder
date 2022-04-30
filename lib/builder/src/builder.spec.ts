@@ -41,6 +41,7 @@ describe('Lint', () => {
         toArray(),
         map(x =>
           x.map(y => {
+            console.log('>>', y.message);
             return { level: y.level, message: y.message };
           })
         )
@@ -69,10 +70,24 @@ describe('Lint', () => {
         level: 'debug',
         message: 'Running stylelint...',
       },
-      expect.objectContaining({
+      {
         level: 'info',
-        message: expect.stringMatching(/indentation|no-unused-vars|no-debugger/),
-      }),
+        // @ts-ignore
+        message: expect.toIncludeMultiple([
+          //autofixable
+          'autofixable.ts\n' + "  8:10  error  Unnecessary 'else' after 'return'  eslint\tno-else-return\n",
+          //file.css
+          'file.css\n' +
+            '  3:3  error  Expected indentation of 4 spaces (indentation)  stylelint\tindentation\n' +
+            '  4:3  error  Expected indentation of 4 spaces (indentation)  stylelint\tindentation\n' +
+            '  5:3  error  Expected indentation of 4 spaces (indentation)  stylelint\tindentation\n',
+          //file.ts
+          'file.ts\n' + "  3:3  error  Unexpected 'debugger' statement  eslint\tno-debugger\n",
+          // info messages
+          '✖ 5 problems (5 errors, 0 warnings)\n' +
+            '  1 error and 0 warnings potentially fixable with the `--fix` option.\n',
+        ]),
+      },
       {
         level: 'error',
         message: 'Lint errors found in the listed files.\n',

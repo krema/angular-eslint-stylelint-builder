@@ -29,5 +29,6 @@
     "strictNullChecks": true,
     "types": ["node", "jest", "@types/jest"]
   },
-  "include": ["lib/**/*"]
+  "include": ["lib/**/*"],
+  "files": ["node_modules/jest-extended/types/index.d.ts"]
 }

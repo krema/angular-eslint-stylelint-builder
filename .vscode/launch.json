@@ -12,7 +12,6 @@
         "--inspect-brk",
         "${workspaceRoot}/node_modules/.bin/jest",
         "--runInBand",
-        "--colors"
       ],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
