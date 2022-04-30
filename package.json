@@ -33,7 +33,7 @@
     "yarn": ">= 1.13.0"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "^0.1303.3",
+    "@angular-devkit/architect": "^0.1303.4",
     "@angular-devkit/core": "^13.3.3",
     "@types/jest": "^27.4.1",
     "@types/node": "^16.11.31",
