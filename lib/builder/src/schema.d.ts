@@ -1,6 +1,6 @@
 import type { JsonObject } from '@angular-devkit/core';
 
-export type BuilderOptions = typeof Schema & JsonObject
+export type BuilderOptions = typeof Schema & JsonObject;
 
 export interface Schema {
   eslintFilePatterns: string[];

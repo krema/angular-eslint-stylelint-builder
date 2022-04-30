@@ -17,8 +17,13 @@
   },
   "scripts": {
     "build": "npm run clean && tsc -p tsconfig.json && npm run copy:root && npm run copy:schema",
+    "test": "npm run build && jest --silent",
     "copy:schema": "cp lib/builder/src/schema.json out/dist",
     "copy:root": "cp lib/builder/package.json lib/builder/builders.json LICENSE README.md out",
+    "lint:check": "eslint ./lib/",
+    "lint:fix": "eslint ./lib/ --fix",
+    "format:check": "prettier --check ./lib/",
+    "format:fix": "prettier --write ./lib/",
     "clean": "rm -rf out",
     "watch": "npm-watch"
   },

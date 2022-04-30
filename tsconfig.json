@@ -27,8 +27,7 @@
     "noUnusedLocals": true,
     "skipDefaultLibCheck": true,
     "strictNullChecks": true,
-    "types": ["node"]
+    "types": ["node", "jest", "@types/jest"]
   },
-  "include": ["lib/**/*"],
-  "exclude": ["lib/**/*.spec.ts"]
+  "include": ["lib/**/*"]
 }

@@ -1,6 +1,6 @@
 import type { BuilderContext } from '@angular-devkit/architect';
 import type { ESLint } from 'eslint';
-import type { LinterOptions } from 'stylelint'
+import type { LinterOptions } from 'stylelint';
 
 import type { Schema } from '../schema';
 import { join, resolve } from 'path';
@@ -26,7 +26,7 @@ export async function lint(context: BuilderContext, options: Schema): Promise<ES
     files: options.stylelintFilePatterns?.map(p => join(workspaceRoot, p)) || [],
   };
 
-  if(!stylelintOptions?.files?.length) {
+  if (!stylelintOptions?.files?.length) {
     return [];
   }
 

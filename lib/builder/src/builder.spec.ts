@@ -1,0 +1,82 @@
+import { toArray, map } from 'rxjs/operators';
+
+import { Architect } from '@angular-devkit/architect';
+import { TestingArchitectHost } from '@angular-devkit/architect/testing';
+import { schema } from '@angular-devkit/core';
+import { Logger } from '@angular-devkit/core/src/logger';
+
+describe('Lint', () => {
+  let architect: Architect;
+  let architectHost: TestingArchitectHost;
+  const logger = new Logger('test');
+
+  beforeEach(async () => {
+    const registry = new schema.CoreSchemaRegistry();
+    registry.addPostTransform(schema.transforms.addUndefinedDefaults);
+
+    // TestingArchitectHost() takes workspace and current directories.
+    // Since we don't use those, both are the same in this case.
+    architectHost = new TestingArchitectHost('./test-project', './test-project');
+    architect = new Architect(architectHost, registry);
+
+    // This will either take a Node package name, or a path to the directory
+    // for the package.json file.
+    await architectHost.addBuilderFromPackage('../../../../out');
+    // @ts-ignore
+    console.info('#', Array.from(architectHost._builderMap.keys()));
+  });
+
+  it('has created the correct linting results', async () => {
+    // A "run" can have multiple outputs, and contains progress information.
+    const run = await architect.scheduleBuilder(
+      '@krema/angular-eslint-stylelint-builder:lint',
+      {
+        eslintFilePatterns: ['src/app/**/*.ts'],
+        stylelintFilePatterns: ['src/app/**/*.css'],
+      },
+      { logger }
+    );
+    const loggerPromise = logger
+      .pipe(
+        toArray(),
+        map(x =>
+          x.map(y => {
+            return { level: y.level, message: y.message };
+          })
+        )
+      )
+      .toPromise();
+
+    // The "result" member (of type BuilderOutput) is the next output.
+    await run.result;
+
+    // Stop the builder from running. This stops Architect from keeping
+    // the builder-associated states in memory, since builders keep waiting
+    // to be scheduled.
+    await run.stop();
+    logger.complete();
+
+    expect(loggerPromise).resolves.toEqual([
+      {
+        level: 'info',
+        message: '\nLinting "<???>"...',
+      },
+      {
+        level: 'debug',
+        message: 'Running eslint...',
+      },
+      {
+        level: 'debug',
+        message: 'Running stylelint...',
+      },
+      expect.objectContaining({
+        level: 'info',
+        message: expect.stringMatching(/indentation|no-unused-vars|no-debugger/),
+      }),
+      {
+        level: 'error',
+        message: 'Lint errors found in the listed files.\n',
+      },
+    ]);
+  });
+});

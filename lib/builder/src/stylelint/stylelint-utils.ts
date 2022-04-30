@@ -1,8 +1,8 @@
 import type { ESLint } from 'eslint';
-import type { LinterResult, PublicApi } from 'stylelint'
+import type { LinterResult, PublicApi } from 'stylelint';
 
 export async function loadStylelint(): Promise<PublicApi> {
-  let stylelint: PromiseLike<PublicApi>
+  let stylelint: PromiseLike<PublicApi>;
 
   try {
     // @ts-ignore
