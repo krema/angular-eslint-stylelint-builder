@@ -1,6 +1,9 @@
 
 # Angular ESLint + Stylelint Linter
 
+![node workflow](https://github.com/krema/angular-eslint-stylelint-builder/actions/workflows/node.js.yml/badge.svg)
+
+
 An Angular CLI builder inspired by [@angular-eslint/builder](https://github.com/angular-eslint/angular-eslint/tree/master/packages/builder) for linting Angular applications using [ESLint](https://eslint.org/) and [stylelint](https://stylelint.io/).
 
 ## Prerequisites
