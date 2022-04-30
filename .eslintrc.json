@@ -4,13 +4,20 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "unused-imports", "prettier"],
   "env": {
     "node": true
   },
 
-  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "plugin:import/recommended",
+    "plugin:import/typescript"
+  ],
   "rules": {
+    "prettier/prettier": "error",
     "@typescript-eslint/consistent-type-imports": "error",
     "@typescript-eslint/no-unused-vars": [
       "error",
