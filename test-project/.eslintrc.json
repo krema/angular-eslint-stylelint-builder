@@ -1,1 +1,1 @@
-{"extends": "eslint:recommended"}
+{ "root": true, "extends": "eslint:recommended" }
