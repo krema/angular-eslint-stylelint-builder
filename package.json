@@ -33,7 +33,7 @@
     "yarn": ">= 1.13.0"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "^0.1303.3",
+    "@angular-devkit/architect": "^0.1303.4",
     "@angular-devkit/core": "^13.3.3",
     "@types/jest": "^27.4.1",
     "@types/node": "^16.11.31",
@@ -41,7 +41,7 @@
     "@typescript-eslint/parser": "^4.33.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jasmine": "^4.1.2",
     "eslint-plugin-prefer-arrow": "^1.2.3",
     "eslint-plugin-prettier": "^4.0.0",
