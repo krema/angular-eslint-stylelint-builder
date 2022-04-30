@@ -1,18 +1,17 @@
-import type { ESLint } from 'eslint';
 import type { BuilderContext } from '@angular-devkit/architect';
 
 import type * as ESLintLibrary from 'eslint';
 import type { Schema } from '../schema';
-import { outputFixes, filterLintResults } from './eslint-utils';
+import { writeFileSync } from 'fs';
+import { dirname, join } from 'path';
 
 import { createDirectory } from '../utils/create-directory';
-import { dirname, join } from 'path';
-import { writeFileSync } from 'fs';
+import { filterLintResults, outputFixes } from './eslint-utils';
 
 export async function report(
   context: BuilderContext,
   eslintInstance: ESLintLibrary.ESLint,
-  lintResults: ESLint.LintResult[],
+  lintResults: ESLintLibrary.ESLint.LintResult[],
   options: Schema,
   workspaceRoot: string
 ): Promise<boolean> {
