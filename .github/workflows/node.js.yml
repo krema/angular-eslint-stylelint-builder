@@ -31,7 +31,7 @@ jobs:
     - run: npm test
     - run: npm run lint
     # throw error if lint has no error
-    - run: !(npm run lint --prefix=test-project)
+    - run: (npm run lint --prefix=test-project && exit 1) || exit 0
     - run: npm run format:check
 
     - name: Test Report
