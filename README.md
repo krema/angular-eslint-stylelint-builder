@@ -42,7 +42,7 @@ Replace the builder of `@angular-eslint` with `@krema/angular-eslint-stylelint-b
 
 Run `ng lint`:
 
-![](assets/BEC08221-A226-4741-BE42-7BF46004B939.png)
+![](.github/terminal.png)
 
 ## Configuration
 
