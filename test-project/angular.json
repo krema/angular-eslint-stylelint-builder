@@ -34,7 +34,9 @@
           "builder": "@krema/angular-eslint-stylelint-builder:lint",
           "options": {
             "eslintFilePatterns": ["**/*.ts"],
-            "stylelintFilePatterns": ["**/*.css"]
+            "eslintCache": true,
+            "stylelintFilePatterns": ["**/*.css"],
+            "stylelintCache": true
           }
         },
         "serve": {
