@@ -5,7 +5,8 @@
   "author": "André Kremser",
   "license": "MIT",
   "workspaces": [
-    "./lib/*"
+    "./lib",
+    "./test-project"
   ],
   "watch": {
     "build": {

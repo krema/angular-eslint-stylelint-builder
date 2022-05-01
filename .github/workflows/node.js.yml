@@ -11,9 +11,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [17.x]
@@ -31,6 +29,7 @@ jobs:
     - run: npm run build --if-present
     - run: npm test
     - run: npm run lint
+    - run: npm run lint --prefix=test-project
     - run: npm run format:check
 
     - name: Test Report
@@ -45,4 +44,3 @@ permissions:
   checks: write
   contents: write
   pull-requests: write
-  
