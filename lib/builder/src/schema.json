@@ -45,11 +45,13 @@
     },
     "eslintCacheLocation": {
       "type": "string",
-      "description": "Path to the cache file or directory"
+      "description": "Path to the cache file or directory",
+      "default": ".angular/cache/.eslintcache"
     },
     "stylelintCacheLocation": {
       "type": "string",
-      "description": "Path to the cache file or directory"
+      "description": "Path to the cache file or directory",
+      "default": ".angular/cache/.eslintcache"
     },
     "eslintCacheStrategy": {
       "type": "string",
@@ -125,7 +127,6 @@
       "description": "Succeeds even if there was linting errors.",
       "default": false
     },
-
     "noEslintrc": {
       "type": "boolean",
       "description": "Disables use of configuration from .eslintrc.* and package.json files",
