@@ -29,7 +29,8 @@ jobs:
     - run: npm run build --if-present
     - run: npm test
     - run: npm run lint
-    - run: npm run lint --prefix=test-project
+    # throw error if lint has no error
+    - run: !(npm run lint --prefix=test-project)
     - run: npm run format:check
 
     - name: Test Report
