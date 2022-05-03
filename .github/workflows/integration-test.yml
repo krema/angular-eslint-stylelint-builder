@@ -1,0 +1,91 @@
+name: Integration Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        angular-version: [12, 13]
+
+    steps:
+    - name: ⤵️ Check out code from GitHub
+      uses: actions/checkout@v3
+
+    - name: 🏗 Setup node version
+      uses: actions/setup-node@v3
+      with:
+        node-version: 17.x
+        cache: 'npm'
+    - run: npm i -g npm@7
+
+    - name: 🏗 Setup Angular Project Version ${{ matrix.angular-version }}
+      run: |
+           mkdir -p tmp
+           cd tmp
+           npx @angular/cli@${{ matrix.angular-version }} new --create-application --skip-install --defaults -g -t -s -S angular${{ matrix.angular-version }}
+           npm install --prefix angular${{ matrix.angular-version }}
+           cd ../
+           
+    - name: 🏗 Build Library
+      run: |
+           npm ci
+           npm run build
+           mkdir -p tmp/dist
+           cd out
+           npm pack --pack-destination ../tmp/dist
+           cd ../tmp/dist
+           echo "LIBRARY=$(find . -mindepth 1 -print -quit)" >> $GITHUB_ENV 
+           cd ../../
+
+    - name: 🔗 Link Library into Angular Project Version  ${{ matrix.angular-version }}
+      run: |
+           cd tmp/angular${{ matrix.angular-version }}
+           npm install --save ../dist/${{ env.LIBRARY }}
+           npm install
+           npx ng --version 
+           cd ../../
+
+    - name: ✅ Add Linter configuration to angular.json into Angular Project Version ${{ matrix.angular-version }}
+      run: |
+           cd tmp/angular${{ matrix.angular-version }}
+           jq -r '.projects.angular${{ matrix.angular-version }}.architect.lint = {"builder":"@krema/angular-eslint-stylelint-builder:lint","options":{"eslintFilePatterns":["src/app/*.ts"],"stylelintFilePatterns":["src/app/*.css"]}}' angular.json > angular.json.tmp
+           mv -f angular.json.tmp angular.json
+           cd ../../
+
+    - name: 🚁 Move test & config files into Angular Project Version ${{ matrix.angular-version }}
+      run: |
+           cp test-project/.eslintrc* tmp/angular${{ matrix.angular-version }}
+           cp test-project/.stylelintrc* tmp/angular${{ matrix.angular-version }}
+           rm -rf tmp/angular${{ matrix.angular-version }}/src/app/*
+           cp test-project/src/app/* tmp/angular${{ matrix.angular-version }}/src/app
+
+    - name: 🚀 Run Linter in Angular Project Version ${{ matrix.angular-version }}
+      run: | 
+           cd tmp/angular${{ matrix.angular-version }}
+           set +e
+           npx ng lint > result.txt
+           set -e
+           cat result.txt
+           grep -Fx "✖ 5 problems (5 errors, 0 warnings)" result.txt && echo "SUCCESS=1" >> $GITHUB_ENV || echo "SUCCESS=0" >> $GITHUB_ENV
+
+    - name: Assert result
+      if: ${{ env.SUCCESS != 1 }}
+      uses: actions/github-script@v6
+      with:
+        script: |
+            core.setFailed('Linter didn\'t work')
+
+
+
+permissions:
+  checks: write
+  contents: write
+  pull-requests: write
+  
