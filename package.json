@@ -17,7 +17,7 @@
   },
   "scripts": {
     "build": "npm run clean && tsc -p tsconfig.json && npm run copy:root && npm run copy:schema",
-    "test": "npm run build && jest --ci --no-colors --reporters=default --reporters=jest-junit --reporters=jest-github-actions-reporter --watchAll=false",
+    "test": "jest --ci --coverage --no-colors",
     "copy:schema": "cp lib/builder/src/schema.json out/dist",
     "copy:root": "cp lib/builder/package.json lib/builder/builders.json LICENSE README.md out",
     "lint": "eslint ./lib/",
