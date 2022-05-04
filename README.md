@@ -1,7 +1,7 @@
 
 # Angular ESLint + Stylelint Linter
 
-![node workflow](https://github.com/krema/angular-eslint-stylelint-builder/actions/workflows/node.js.yml/badge.svg)
+[![npm version](https://badge.fury.io/js/@krema%2Fangular-eslint-stylelint-builder.svg)](https://badge.fury.io/js/@krema%2Fangular-eslint-stylelint-builder) ![node workflow](https://github.com/krema/angular-eslint-stylelint-builder/actions/workflows/integration-test.yml/badge.svg) ![node workflow](https://github.com/krema/angular-eslint-stylelint-builder/actions/workflows/unit-test.yml/badge.svg)
 
 
 An Angular CLI builder inspired by [@angular-eslint/builder](https://github.com/angular-eslint/angular-eslint/tree/master/packages/builder) for linting Angular applications using [ESLint](https://eslint.org/) and [stylelint](https://stylelint.io/).
@@ -42,7 +42,7 @@ Replace the builder of `@angular-eslint` with `@krema/angular-eslint-stylelint-b
 
 Run `ng lint`:
 
-![](assets/BEC08221-A226-4741-BE42-7BF46004B939.png)
+![](.github/assets/terminal.png)
 
 ## Configuration
 
@@ -258,7 +258,3 @@ The following options can be configured:
     <td>eslint, stylelint</td>
   </tr>
 </table>
-
-## TODO
-
-- [ ] Write tests 
