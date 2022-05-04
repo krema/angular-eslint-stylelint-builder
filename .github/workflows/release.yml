@@ -8,18 +8,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v3
+      - name: ⤵️ Check out code from GitHub
+        uses: actions/checkout@v3
+
+      - name: 🏗 Setup node version
+        uses: actions/setup-node@v3
         with:
           node-version: '17.x'
           registry-url: 'https://registry.npmjs.org'
       - run: npm i -g npm@7
-      - name: Install dependencies
+
+      - name: 🏗 Install dependencies
         run: npm ci  
-      - name: Build
+
+      - name: 🏗 Build
         run: npm run build
-      - name: Release
+
+      - name: 🚀 Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
