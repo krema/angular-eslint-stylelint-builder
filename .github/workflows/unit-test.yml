@@ -33,14 +33,6 @@ jobs:
            npm run lint
            npm run format:check
 
-    - name: 🧪 Report tests
-      uses: dorny/test-reporter@v1
-      if: success() || failure()    # run this step even if previous step failed
-      with:
-        name: JEST Tests            # Name of the check run which will be created
-        path: junit.xml             # Path to test results
-        reporter: jest-junit        # Format of test results
-
 permissions:
   checks: write
   contents: write

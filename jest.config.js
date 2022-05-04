@@ -5,6 +5,6 @@ module.exports = {
   testEnvironment: 'node',
   testPathIgnorePatterns: ['test-project', 'out'],
   testLocationInResults: true,
-  reporters: ['default', 'jest-junit', 'jest-github-actions-reporter'],
-  setupFilesAfterEnv: ['jest-extended/all']
+  reporters: ['default'],
+  setupFilesAfterEnv: ['jest-extended/all'],
 };
