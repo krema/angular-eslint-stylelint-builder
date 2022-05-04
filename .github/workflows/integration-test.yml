@@ -61,10 +61,10 @@ jobs:
 
     - name: 🚁 Move test & config files into Angular Project Version ${{ matrix.angular-version }}
       run: |
-           cp test-project/.eslintrc* tmp/angular${{ matrix.angular-version }}
-           cp test-project/.stylelintrc* tmp/angular${{ matrix.angular-version }}
+           cp test/.eslintrc* tmp/angular${{ matrix.angular-version }}
+           cp test/.stylelintrc* tmp/angular${{ matrix.angular-version }}
            rm -rf tmp/angular${{ matrix.angular-version }}/src/app/*
-           cp test-project/src/app/* tmp/angular${{ matrix.angular-version }}/src/app
+           cp test/src/* tmp/angular${{ matrix.angular-version }}/src/app
 
     - name: 🚀 Run Linter in Angular Project Version ${{ matrix.angular-version }}
       run: | 

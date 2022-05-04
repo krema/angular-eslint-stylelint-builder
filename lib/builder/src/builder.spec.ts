@@ -16,7 +16,7 @@ describe('Lint', () => {
 
     // TestingArchitectHost() takes workspace and current directories.
     // Since we don't use those, both are the same in this case.
-    architectHost = new TestingArchitectHost('./test-project', './test-project');
+    architectHost = new TestingArchitectHost('./test', './test');
     architect = new Architect(architectHost, registry);
 
     // This will either take a Node package name, or a path to the directory
@@ -31,8 +31,8 @@ describe('Lint', () => {
     const run = await architect.scheduleBuilder(
       '@krema/angular-eslint-stylelint-builder:lint',
       {
-        eslintFilePatterns: ['src/app/**/*.ts'],
-        stylelintFilePatterns: ['src/app/**/*.css'],
+        eslintFilePatterns: ['src/**/*.ts'],
+        stylelintFilePatterns: ['src/**/*.css'],
       },
       { logger }
     );
