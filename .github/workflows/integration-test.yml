@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        angular-version: [12, 13]
+        angular-version: [9, 10, 11, 12, 13]
 
     steps:
     - name: ⤵️ Check out code from GitHub
@@ -23,13 +23,18 @@ jobs:
       with:
         node-version: 17.x
         cache: 'npm'
-    - run: npm i -g npm@7
+    - run: |
+           npm i -g npm@7
+           npm i -g npm-check-updates 
 
     - name: 🏗 Setup Angular Project Version ${{ matrix.angular-version }}
       run: |
            mkdir -p tmp
            cd tmp
            npx @angular/cli@${{ matrix.angular-version }} new --create-application --skip-install --defaults -g -t -s -S angular${{ matrix.angular-version }}
+           cd angular${{ matrix.angular-version }}
+           ncu --target minor -f /jasmine/ -u
+           cd ../
            npm install --prefix angular${{ matrix.angular-version }}
            cd ../
            
