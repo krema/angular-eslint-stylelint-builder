@@ -6,6 +6,10 @@
 
 An Angular CLI builder inspired by [@angular-eslint/builder](https://github.com/angular-eslint/angular-eslint/tree/master/packages/builder) for linting Angular applications using [ESLint](https://eslint.org/) and [stylelint](https://stylelint.io/).
 
+The library works with following Angular versions:
+
+![9](https://img.shields.io/badge/angular-9-%23DD0031.svg?flat-square&logo=angular&labelColor=ff0000&color=grey) ![10](https://img.shields.io/badge/angular-10-%23DD0031.svg?flat-square&logo=angular&labelColor=ff0000&color=grey) ![11](https://img.shields.io/badge/angular-11-%23DD0031.svg?flat-square&logo=angular&labelColor=ff0000&color=grey) ![12](https://img.shields.io/badge/angular-12-%23DD0031.svg?flat-square&logo=angular&labelColor=ff0000&color=grey) ![13](https://img.shields.io/badge/angular-13-%23DD0031.svg?flat-square&logo=angular&labelColor=ff0000&color=grey)
+
 ## Prerequisites
 
 Installed and configured **eslint** and **stylelint** e.g. via `.eslintrc` and `.stylelintrc`.
