@@ -1,5 +1,6 @@
 import type { ESLint } from 'eslint';
 import type { LinterResult, PublicApi } from 'stylelint';
+import { normalize as normalizePath } from 'path';
 
 export async function loadStylelint(): Promise<PublicApi> {
   let stylelint: PromiseLike<PublicApi>;
@@ -18,7 +19,7 @@ export function convertToLintResult(stylelintResults: LinterResult): ESLint.Lint
     x =>
       ({
         errorCount: x.warnings.length,
-        filePath: x.source,
+        filePath: normalizePath(x.source as string).replace(/\\/g, '/'),
         fixableErrorCount: 0,
         fixableWarningCount: 0,
         usedDeprecatedRules: [],
