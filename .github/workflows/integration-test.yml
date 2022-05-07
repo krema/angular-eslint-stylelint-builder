@@ -11,11 +11,15 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
     strategy:
       matrix:
         angular-version: [9, 10, 11, 12, 13]
+        os: [ubuntu-latest, windows-latest, mac-latest]
+
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
 
     steps:
     - name: ⤵️ Check out code from GitHub
@@ -36,7 +40,7 @@ jobs:
            cd tmp
            npx @angular/cli@${{ matrix.angular-version }} new --create-application --skip-install --defaults -g -t -s -S angular${{ matrix.angular-version }}
            cd angular${{ matrix.angular-version }}
-           ncu --target minor -f /jasmine/ -u
+           ncu --target minor -u jasmine-core
            npm install
 
     - name: 🏗 Build Library

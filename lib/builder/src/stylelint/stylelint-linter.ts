@@ -3,7 +3,7 @@ import type { ESLint } from 'eslint';
 import type { LinterOptions } from 'stylelint';
 
 import type { Schema } from '../schema';
-import { join, resolve } from 'path';
+import { join, resolve, normalize } from 'path';
 
 import { convertToLintResult, loadStylelint } from './stylelint-utils';
 
@@ -23,7 +23,7 @@ export async function lint(context: BuilderContext, options: Schema): Promise<ES
     ignorePath: options.stylelintIgnorePath || undefined,
     maxWarnings: options.maxWarnings,
     configFile: configPath,
-    files: options.stylelintFilePatterns?.map(p => join(workspaceRoot, p)) || [],
+    files: options.stylelintFilePatterns?.map(p => normalize(join(workspaceRoot, p)).replace(/\\/g, '/')) || [],
   };
 
   if (!stylelintOptions?.files?.length) {
