@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/krema/angular-eslint-stylelint-builder/compare/v1.2.0...v1.2.1) (2022-05-07)
+
+
+### Bug Fixes
+
+* **stylelint:** 🐛 normalize windows and canonical paths ([d63cb36](https://github.com/krema/angular-eslint-stylelint-builder/commit/d63cb3676e940d2c80aa05f92fd901880be3a891))
+
 # [1.2.0](https://github.com/krema/angular-eslint-stylelint-builder/compare/v1.1.0...v1.2.0) (2022-05-05)
 
 
