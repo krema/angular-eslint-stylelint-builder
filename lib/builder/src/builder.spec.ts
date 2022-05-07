@@ -39,8 +39,8 @@ describe('Lint', () => {
     const loggerPromise = logger
       .pipe(
         toArray(),
-        map(x =>
-          x.map(y => {
+        map(messages =>
+          messages.map(y => {
             console.log('>>', y.message);
             return { level: y.level, message: y.message };
           })

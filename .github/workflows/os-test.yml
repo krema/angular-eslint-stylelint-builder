@@ -1,0 +1,90 @@
+name: Operation System Test
+
+on:
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  checks: write
+  contents: write
+  pull-requests: write
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, mac-latest]
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: ⤵️ Check out code from GitHub
+        uses: actions/checkout@v3
+
+      - name: 🏗 Setup node version
+        uses: actions/setup-node@v3
+        with:
+          node-version: 17
+          cache: 'npm'
+      - run: |
+          npm i -g npm@7
+          npm i -g npm-check-updates
+
+      - name: 🏗 Setup Angular Project Version 13
+        run: |
+          mkdir -p tmp
+          cd tmp
+          npx @angular/cli@13 new --create-application --skip-install --defaults -g -t -s -S angular13
+          cd angular13
+          ncu --target minor -f /jasmine/ -u
+          cd ../
+          npm install --prefix angular13
+          cd ../
+
+      - name: 🏗 Build Library
+        run: |
+          npm ci
+          npm run build
+          mkdir -p tmp/dist
+          cd out
+          npm pack --pack-destination ../tmp/dist
+          cd ../tmp/dist
+          echo "LIBRARY=$(find . -mindepth 1 -print -quit)" >> $GITHUB_ENV
+          cd ../../
+
+      - name: 🔗 Link Library into Angular Project Version  13
+        run: |
+          cd tmp/angular13
+          npm install --save ../dist/${{ env.LIBRARY }}
+          npm install
+          npx ng --version
+          cd ../../
+
+      - name: ✅ Add Linter configuration to angular.json into Angular Project Version 13
+        run: |
+          cd tmp/angular13
+          jq -r '.projects.angular13.architect.lint = {"builder":"@krema/angular-eslint-stylelint-builder:lint","options":{"eslintFilePatterns":["src/app/*.ts"],"stylelintFilePatterns":["src/app/*.css"]}}' angular.json > angular.json.tmp
+          mv -f angular.json.tmp angular.json
+          cd ../../
+
+      - name: 🚁 Move test & config files into Angular Project Version 13
+        run: |
+          cp test/.eslintrc* tmp/angular13
+          cp test/.stylelintrc* tmp/angular13
+          rm -rf tmp/angular13/src/app/*
+          cp test/src/* tmp/angular13/src/app
+
+      - name: 🚀 Run Linter in Angular Project Version 13
+        run: |
+          cd tmp/angular13
+          set +e
+          npx ng lint > result.txt
+          set -e
+          cat result.txt
+          grep -Fx "✖ 5 problems (5 errors, 0 warnings)" result.txt && echo "SUCCESS=1" >> $GITHUB_ENV || echo "SUCCESS=0" >> $GITHUB_ENV
+
+      - name: Assert result
+        if: ${{ env.SUCCESS != 1 }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            core.setFailed('Linter didn\'t work')

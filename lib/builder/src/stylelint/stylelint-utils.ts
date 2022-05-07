@@ -1,5 +1,6 @@
 import type { ESLint } from 'eslint';
 import type { LinterResult, PublicApi } from 'stylelint';
+import { normalize as normalizePath } from 'path';
 
 export async function loadStylelint(): Promise<PublicApi> {
   let stylelint: PromiseLike<PublicApi>;
@@ -13,22 +14,23 @@ export async function loadStylelint(): Promise<PublicApi> {
   }
 }
 
+// todo: this should not be mixed with eslint, introduce a LintResult inside your lib
 export function convertToLintResult(stylelintResults: LinterResult): ESLint.LintResult[] {
   return stylelintResults.results.map(
-    x =>
+    result =>
       ({
-        errorCount: x.warnings.length,
-        filePath: x.source,
+        errorCount: result.warnings.length,
+        filePath: normalizePath(result.source as string),
         fixableErrorCount: 0,
         fixableWarningCount: 0,
         usedDeprecatedRules: [],
         warningCount: 0,
-        messages: x.warnings.map(y => ({
-          column: y.column,
-          line: y.line,
-          message: y.text,
-          ruleId: `stylelint\t${y.rule}`,
-          severity: y.severity === 'error' ? 2 : 1,
+        messages: result.warnings.map(warning => ({
+          column: warning.column,
+          line: warning.line,
+          message: warning.text,
+          ruleId: `stylelint\t${warning.rule}`,
+          severity: warning.severity === 'error' ? 2 : 1,
         })),
       } as ESLint.LintResult)
   );

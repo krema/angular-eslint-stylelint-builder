@@ -4,6 +4,11 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  checks: write
+  contents: write
+  pull-requests: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,11 +24,11 @@ jobs:
     - name: 🏗 Setup node version
       uses: actions/setup-node@v3
       with:
-        node-version: 17.x
+        node-version: 17
         cache: 'npm'
     - run: |
            npm i -g npm@7
-           npm i -g npm-check-updates 
+           npm i -g npm-check-updates
 
     - name: 🏗 Setup Angular Project Version ${{ matrix.angular-version }}
       run: |
@@ -32,10 +37,8 @@ jobs:
            npx @angular/cli@${{ matrix.angular-version }} new --create-application --skip-install --defaults -g -t -s -S angular${{ matrix.angular-version }}
            cd angular${{ matrix.angular-version }}
            ncu --target minor -f /jasmine/ -u
-           cd ../
-           npm install --prefix angular${{ matrix.angular-version }}
-           cd ../
-           
+           npm install
+
     - name: 🏗 Build Library
       run: |
            npm ci
@@ -44,23 +47,20 @@ jobs:
            cd out
            npm pack --pack-destination ../tmp/dist
            cd ../tmp/dist
-           echo "LIBRARY=$(find . -mindepth 1 -print -quit)" >> $GITHUB_ENV 
-           cd ../../
+           echo "LIBRARY=$(find . -mindepth 1 -print -quit)" >> $GITHUB_ENV
 
     - name: 🔗 Link Library into Angular Project Version  ${{ matrix.angular-version }}
       run: |
            cd tmp/angular${{ matrix.angular-version }}
            npm install --save ../dist/${{ env.LIBRARY }}
            npm install
-           npx ng --version 
-           cd ../../
+           npx ng --version
 
     - name: ✅ Add Linter configuration to angular.json into Angular Project Version ${{ matrix.angular-version }}
       run: |
            cd tmp/angular${{ matrix.angular-version }}
            jq -r '.projects.angular${{ matrix.angular-version }}.architect.lint = {"builder":"@krema/angular-eslint-stylelint-builder:lint","options":{"eslintFilePatterns":["src/app/*.ts"],"stylelintFilePatterns":["src/app/*.css"]}}' angular.json > angular.json.tmp
            mv -f angular.json.tmp angular.json
-           cd ../../
 
     - name: 🚁 Move test & config files into Angular Project Version ${{ matrix.angular-version }}
       run: |
@@ -70,7 +70,7 @@ jobs:
            cp test/src/* tmp/angular${{ matrix.angular-version }}/src/app
 
     - name: 🚀 Run Linter in Angular Project Version ${{ matrix.angular-version }}
-      run: | 
+      run: |
            cd tmp/angular${{ matrix.angular-version }}
            set +e
            npx ng lint > result.txt
@@ -84,11 +84,3 @@ jobs:
       with:
         script: |
             core.setFailed('Linter didn\'t work')
-
-
-
-permissions:
-  checks: write
-  contents: write
-  pull-requests: write
-  
