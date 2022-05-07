@@ -13,11 +13,11 @@ export async function lint(
     options.eslintFilePatterns.map(p => join(workspaceRoot, p))
   );
 
-  return lintResults.map(x => ({
-    ...x,
-    messages: x.messages.map(y => ({
-      ...y,
-      ruleId: `eslint\t${y.ruleId}`,
+  return lintResults.map(result => ({
+    ...result,
+    messages: result.messages.map(message => ({
+      ...message,
+      ruleId: `eslint\t${message.ruleId}`,
     })),
   }));
 }
