@@ -1,7 +1,7 @@
 import type { Schema } from '../schema';
 import type { ESLint } from 'eslint';
 import { join, resolve } from 'path';
-import { checkESlintVersion, loadESLint } from './eslint-utils';
+import { checkESlintVersion, loadESLint, outputFixes } from './eslint-utils';
 
 export async function lint(
   linterInstance: ESLint,
@@ -12,6 +12,9 @@ export async function lint(
     // lintFilePatterns are defined relative to the root of the Angular-CLI workspace
     options.eslintFilePatterns.map(p => join(workspaceRoot, p))
   );
+
+  // Modify the files with the fixed code.
+  await outputFixes(lintResults);
 
   return lintResults.map(result => ({
     ...result,
