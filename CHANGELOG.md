@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/krema/angular-eslint-stylelint-builder/compare/v1.2.1...v1.2.2) (2022-05-23)
+
+
+### Bug Fixes
+
+* **autofix:** 🐛  write autofixes to disk for eslint ([5ba5bd2](https://github.com/krema/angular-eslint-stylelint-builder/commit/5ba5bd2202805b711e67e0bdbf2ee54136bfb372))
+
 ## [1.2.1](https://github.com/krema/angular-eslint-stylelint-builder/compare/v1.2.0...v1.2.1) (2022-05-07)
 
 
