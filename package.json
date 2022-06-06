@@ -33,7 +33,7 @@
     "yarn": ">= 1.13.0"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "^0.1303.6",
+    "@angular-devkit/architect": "^0.1400.0",
     "@angular-devkit/core": "^13.3.6",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
