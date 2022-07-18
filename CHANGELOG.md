@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/krema/angular-eslint-stylelint-builder/compare/v1.2.2...v1.2.3) (2022-07-18)
+
+
+### Bug Fixes
+
+* **workflow:** use check-runs ([09d1768](https://github.com/krema/angular-eslint-stylelint-builder/commit/09d1768f860dad81f0071255f35bd49b9b41291b))
+
 ## [1.2.2](https://github.com/krema/angular-eslint-stylelint-builder/compare/v1.2.1...v1.2.2) (2022-05-23)
 
 
