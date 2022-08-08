@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/krema/angular-eslint-stylelint-builder/compare/v1.2.3...v1.3.0) (2022-08-08)
+
+
+### Features
+
+* **deps:** 👷 add Angular 14 support ([47c7442](https://github.com/krema/angular-eslint-stylelint-builder/commit/47c74424f2ca713988acca54cd83973adc5b4eac))
+
 ## [1.2.3](https://github.com/krema/angular-eslint-stylelint-builder/compare/v1.2.2...v1.2.3) (2022-07-18)
 
 
