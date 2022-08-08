@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["node", "jest"]
+  },
+  "files": ["node_modules/jest-extended/types/index.d.ts"],
+  "include": [
+    "lib/**/*.spec.ts",
+    "lib/**/*.d.ts",
+    "node_modules/@angular-devkit/**/*"
+  ]
+}
