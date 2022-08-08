@@ -16,7 +16,7 @@
     }
   },
   "scripts": {
-    "build": "npm run clean && tsc -p tsconfig.json && npm run copy:root && npm run copy:schema",
+    "build": "npm run clean && tsc -p tsconfig.lib.json && npm run copy:root && npm run copy:schema",
     "test": "jest --ci --coverage --no-colors",
     "copy:schema": "cp lib/builder/src/schema.json out/dist",
     "copy:root": "cp lib/builder/package.json lib/builder/builders.json LICENSE README.md out",
@@ -33,11 +33,11 @@
     "yarn": ">= 1.13.0"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "^0.1303.6",
-    "@angular-devkit/core": "^13.3.6",
+    "@angular-devkit/architect": "^0.1401.1",
+    "@angular-devkit/core": "^14.1.1",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
-    "@types/jest": "^27.5.0",
+    "@types/jest": "^27.5.2",
     "@types/node": "^18.6.1",
     "@typescript-eslint/eslint-plugin": "^5.32.0",
     "@typescript-eslint/parser": "^5.31.0",

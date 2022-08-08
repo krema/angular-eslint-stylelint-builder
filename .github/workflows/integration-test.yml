@@ -13,7 +13,7 @@ jobs:
   build:
     strategy:
       matrix:
-        angular-version: [9, 10, 11, 12, 13]
+        angular-version: [9, 10, 11, 12, 13, 14]
         os: [ubuntu-latest, windows-latest]
 
     runs-on: ${{ matrix.os }}
@@ -28,7 +28,7 @@ jobs:
     - name: 🏗 Setup node version
       uses: actions/setup-node@v3
       with:
-        node-version: 17
+        node-version: 16
         cache: 'npm'
     - run: |
            npm i -g npm@7
@@ -58,7 +58,7 @@ jobs:
            cd tmp/angular${{ matrix.angular-version }}
            npm install --save ../dist/${{ env.LIBRARY }}
            npm install
-           npx ng --version
+           npx ng version
 
     - name: ✅ Add Linter configuration to angular.json into Angular Project Version ${{ matrix.angular-version }}
       run: |

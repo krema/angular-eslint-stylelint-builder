@@ -3,7 +3,7 @@
     "baseUrl": "tsconfig",
     "moduleResolution": "node",
     "module": "commonjs",
-    "target": "es6",
+    "target": "es2015",
     "lib": ["es2018", "dom"],
     "strict": true,
     "allowSyntheticDefaultImports": true,
@@ -17,7 +17,7 @@
     "skipLibCheck": true,
     "outDir": "out/dist",
     "noImplicitAny": false,
-    "typeRoots": ["./node_modules/@types"],
+    "typeRoots": ["node_modules/@types"],
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "noEmitOnError": true,
@@ -26,9 +26,6 @@
     "noUnusedParameters": false,
     "noUnusedLocals": true,
     "skipDefaultLibCheck": true,
-    "strictNullChecks": true,
-    "types": ["node", "jest", "@types/jest"]
-  },
-  "include": ["lib/**/*"],
-  "files": ["node_modules/jest-extended/types/index.d.ts"]
+    "strictNullChecks": true
+  }
 }

@@ -2,14 +2,13 @@ import { toArray, map } from 'rxjs/operators';
 
 import { Architect } from '@angular-devkit/architect';
 import { TestingArchitectHost } from '@angular-devkit/architect/testing';
-import { schema } from '@angular-devkit/core';
-import { Logger } from '@angular-devkit/core/src/logger';
+import { logging, schema } from '@angular-devkit/core';
 import { exec } from 'child_process';
 
 describe('Lint', () => {
   let architect: Architect;
   let architectHost: TestingArchitectHost;
-  let logger: Logger;
+  let logger: logging.Logger;
 
   beforeEach(async () => {
     const registry = new schema.CoreSchemaRegistry();
@@ -19,7 +18,7 @@ describe('Lint', () => {
     // Since we don't use those, both are the same in this case.
     architectHost = new TestingArchitectHost('./test', './test');
     architect = new Architect(architectHost, registry);
-    logger = new Logger('test');
+    logger = new logging.Logger('test');
 
     // This will either take a Node package name, or a path to the directory
     // for the package.json file.
@@ -40,7 +39,7 @@ describe('Lint', () => {
         eslintFilePatterns: ['src/**/*.ts'],
         stylelintFilePatterns: ['src/**/*.css'],
       },
-      { logger }
+      { logger: logger }
     );
     const loggerPromise = logger
       .pipe(
