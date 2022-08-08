@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@angular-devkit/architect": "^0.1303.6",
-    "@angular-devkit/core": "^13.3.6",
+    "@angular-devkit/core": "^14.1.1",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
     "@types/jest": "^27.5.0",
