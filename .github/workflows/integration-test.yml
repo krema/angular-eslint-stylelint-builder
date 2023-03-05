@@ -23,7 +23,7 @@ jobs:
 
     steps:
     - name: Install pnpm
-      run: npm install -g pnpm
+      run: npm install -g pnpm npm-check-updates
 
     - name: ⤵️ Check out code from GitHub
       uses: actions/checkout@v3
