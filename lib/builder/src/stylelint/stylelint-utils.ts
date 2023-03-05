@@ -1,13 +1,11 @@
 import type { ESLint } from 'eslint';
-import type { LinterResult, PublicApi } from 'stylelint';
+import type stylelint from 'stylelint';
+import type { LinterResult } from 'stylelint';
 
-export async function loadStylelint(): Promise<PublicApi> {
-  let stylelint: PromiseLike<PublicApi>;
-
+export async function loadStylelint(): Promise<typeof stylelint> {
   try {
-    // @ts-ignore
-    stylelint = await import('stylelint');
-    return stylelint;
+    //@ts-ignore
+    return await import('stylelint');
   } catch {
     throw new Error('Unable to find stylelint. Ensure stylelint is installed.');
   }
