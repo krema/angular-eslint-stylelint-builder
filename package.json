@@ -4,9 +4,6 @@
   "description": "Angular CLI builder for ESLint and stylelint",
   "author": "André Kremser",
   "license": "MIT",
-  "workspaces": [
-    "./lib/*"
-  ],
   "watch": {
     "build": {
       "patterns": [
@@ -16,6 +13,7 @@
     }
   },
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "build": "npm run clean && tsc -p tsconfig.lib.json && npm run copy:root && npm run copy:schema",
     "test": "jest --ci --coverage --no-colors",
     "copy:schema": "cp lib/builder/src/schema.json out/dist",

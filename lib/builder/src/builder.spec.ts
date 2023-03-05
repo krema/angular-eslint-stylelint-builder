@@ -4,6 +4,7 @@ import { Architect } from '@angular-devkit/architect';
 import { TestingArchitectHost } from '@angular-devkit/architect/testing';
 import { logging, schema } from '@angular-devkit/core';
 import { exec } from 'child_process';
+import * as path from 'path';
 
 describe('Lint', () => {
   let architect: Architect;
@@ -11,6 +12,7 @@ describe('Lint', () => {
   let logger: logging.Logger;
 
   beforeEach(async () => {
+    console.log(path.join(process.cwd(), './out'));
     const registry = new schema.CoreSchemaRegistry();
     registry.addPostTransform(schema.transforms.addUndefinedDefaults);
 
@@ -22,7 +24,7 @@ describe('Lint', () => {
 
     // This will either take a Node package name, or a path to the directory
     // for the package.json file.
-    await architectHost.addBuilderFromPackage('../../../../out');
+    await architectHost.addBuilderFromPackage(path.join(process.cwd(), './out'));
     // @ts-ignore
     console.info('#', Array.from(architectHost._builderMap.keys()));
   });

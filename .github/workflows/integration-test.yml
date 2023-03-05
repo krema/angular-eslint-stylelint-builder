@@ -22,6 +22,9 @@ jobs:
         shell: bash
 
     steps:
+    - name: Install pnpm
+      run: npm install -g pnpm
+
     - name: ⤵️ Check out code from GitHub
       uses: actions/checkout@v3
 
@@ -29,36 +32,35 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 16
-        cache: 'npm'
+        cache: 'pnpm'
     - run: |
-           npm i -g npm@7
-           npm i -g npm-check-updates
+           pnpm install --frozen-lockfile
 
     - name: 🏗 Setup Angular Project Version ${{ matrix.angular-version }}
       run: |
            mkdir -p tmp
            cd tmp
-           npx @angular/cli@${{ matrix.angular-version }} new --create-application --skip-install --defaults -g -t -s -S angular${{ matrix.angular-version }}
+           pnpm dlx @angular/cli@${{ matrix.angular-version }} new --create-application --package-manager=pnpm --skip-install --defaults -g -t -s -S angular${{ matrix.angular-version }}
            cd angular${{ matrix.angular-version }}
            ncu --target minor -u jasmine-core
-           npm install
+           pnpm install
 
     - name: 🏗 Build Library
       run: |
-           npm ci
-           npm run build
+           pnpm install --frozen-lockfile
+           pnpm build
            mkdir -p tmp/dist
            cd out
-           npm pack --pack-destination ../tmp/dist
+           pnpm pack --pack-destination ../tmp/dist
            cd ../tmp/dist
            echo "LIBRARY=$(find . -mindepth 1 -print -quit)" >> $GITHUB_ENV
 
     - name: 🔗 Link Library into Angular Project Version  ${{ matrix.angular-version }}
       run: |
            cd tmp/angular${{ matrix.angular-version }}
-           npm install --save ../dist/${{ env.LIBRARY }}
-           npm install
-           npx ng version
+           pnpm install --save ../dist/${{ env.LIBRARY }}
+           pnpm install
+           pnpm exec ng version
 
     - name: ✅ Add Linter configuration to angular.json into Angular Project Version ${{ matrix.angular-version }}
       run: |
@@ -77,7 +79,7 @@ jobs:
       run: |
            cd tmp/angular${{ matrix.angular-version }}
            set +e
-           npx ng lint > result.txt
+           pnpm exec ng lint > result.txt
            set -e
            cat result.txt
            grep -Fx "✖ 5 problems (5 errors, 0 warnings)" result.txt && echo "SUCCESS=1" >> $GITHUB_ENV || echo "SUCCESS=0" >> $GITHUB_ENV
