@@ -1,20 +1,13 @@
 
 # Angular ESLint + Stylelint Linter
 
-[![npm version](https://badge.fury.io/js/@krema%2Fangular-eslint-stylelint-builder.svg)](https://badge.fury.io/js/@krema%2Fangular-eslint-stylelint-builder) ![node workflow](https://github.com/krema/angular-eslint-stylelint-builder/actions/workflows/integration-test.yml/badge.svg) ![node workflow](https://github.com/krema/angular-eslint-stylelint-builder/actions/workflows/unit-test.yml/badge.svg)
+[![npm version](https://badge.fury.io/js/@krema%2Fangular-eslint-stylelint-builder.svg)](https://badge.fury.io/js/@krema%2Fangular-eslint-stylelint-builder) ![node workflow](https://github.com/krema/angular-eslint-stylelint-builder/actions/workflows/integration-test.yml/badge.svg) ![node workflow](https://github.com/krema/angular-eslint-stylelint-builder/actions/workflows/unit-test.yml/badge.svg) ![angular versions](https://img.shields.io/badge/angular-v9--v15-%2523DD0031.svg?flat-square&logo=angular&labelColor=ff0000&color=grey)
 
-
-An Angular CLI builder inspired by [@angular-eslint/builder](https://github.com/angular-eslint/angular-eslint/tree/master/packages/builder) for linting Angular applications using [ESLint](https://eslint.org/) and [stylelint](https://stylelint.io/).
-
-The library works with following Angular versions:
-
-![9](https://img.shields.io/badge/angular-9-%23DD0031.svg?flat-square&logo=angular&labelColor=ff0000&color=grey) ![10](https://img.shields.io/badge/angular-10-%23DD0031.svg?flat-square&logo=angular&labelColor=ff0000&color=grey) ![11](https://img.shields.io/badge/angular-11-%23DD0031.svg?flat-square&logo=angular&labelColor=ff0000&color=grey) ![12](https://img.shields.io/badge/angular-12-%23DD0031.svg?flat-square&logo=angular&labelColor=ff0000&color=grey) ![13](https://img.shields.io/badge/angular-13-%23DD0031.svg?flat-square&logo=angular&labelColor=ff0000&color=grey) ![14](https://img.shields.io/badge/angular-14-%23DD0031.svg?flat-square&logo=angular&labelColor=ff0000&color=grey)
+An Angular CLI builder inspired by [@angular-eslint/builder](https://github.com/angular-eslint/angular-eslint/tree/master/packages/builder) for linting Angular applications using [ESLint](https://eslint.org/) and [stylelint](https://stylelint.io/) in one easy step.
 
 ## Prerequisites
 
-Installed and configured **eslint** and **stylelint** e.g. via `.eslintrc` and `.stylelintrc`.
-
-For more information on converting TSLint to ESLint in Angular projects please see the following [@angular-eslint](https://github.com/angular-eslint/angular-eslint) project.
+Before using this linter, please ensure that you have already installed and configured **eslint** and **stylelint**, for example, by setting up `.eslintrc` and `.stylelintrc` files. For more information on converting TSLint to ESLint in Angular projects, please check out the [@angular-eslint](https://github.com/angular-eslint/angular-eslint) project.
 
 ## Install
 
@@ -22,8 +15,7 @@ For more information on converting TSLint to ESLint in Angular projects please s
 
 ## Usage
 
-Add the builder *@krema/angular-eslint-stylelint-builder:lint"* to the lint task in your *angular.json*. 
-
+Add the builder `@krema/angular-eslint-stylelint-builder:lint` to the lint task in your *angular.json*.
 
 **angular.json**
 
@@ -31,8 +23,7 @@ Add the builder *@krema/angular-eslint-stylelint-builder:lint"* to the lint task
 
 Replace the builder of `@angular-eslint` with `@krema/angular-eslint-stylelint-builder`:
 
-
-```diff        
+```diff
  "lint": {
 -    "builder": "@angular-eslint/builder:lint",
 +    "builder": "@krema/angular-eslint-stylelint-builder:lint",
@@ -50,7 +41,7 @@ Run `ng lint`:
 
 ## Configuration
 
-The following options can be configured:
+You can configure the following options:
 
 <table>
   <tr>
@@ -77,7 +68,7 @@ The following options can be configured:
     <td>eslintConfig</td>
     <td></td>
     <td>
-      Use this configuration, overriding .eslintrc.* config options if present
+      Use this configuration, overriding .eslintrc.*config options if present
     </td>
     <td></td>
     <td>eslint</td>
