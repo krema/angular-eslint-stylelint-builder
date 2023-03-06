@@ -13,7 +13,7 @@ jobs:
   build:
     strategy:
       matrix:
-        angular-version: [9, 10, 11, 12, 13, 14]
+        angular-version: [9, 10, 11, 12, 13, 14, 15]
         os: [ubuntu-latest, windows-latest]
 
     runs-on: ${{ matrix.os }}
@@ -58,6 +58,7 @@ jobs:
     - name: 🔗 Link Library into Angular Project Version  ${{ matrix.angular-version }}
       run: |
            cd tmp/angular${{ matrix.angular-version }}
+           pnpm config set auto-install-peers true --location project
            pnpm install --save ../dist/${{ env.LIBRARY }}
            pnpm install
            pnpm exec ng version
