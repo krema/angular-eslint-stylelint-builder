@@ -34,7 +34,7 @@
     "@angular-devkit/architect": "^0.1401.3",
     "@semantic-release/changelog": "^6.0.2",
     "@semantic-release/git": "^10.0.1",
-    "@types/jest": "^27.5.2",
+    "@types/jest": "^29.4.0",
     "@types/node": "^16.18.14",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.53.0",
