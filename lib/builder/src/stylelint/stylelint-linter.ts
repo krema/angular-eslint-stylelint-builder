@@ -1,6 +1,6 @@
 import type { BuilderContext } from '@angular-devkit/architect';
 import type { ESLint } from 'eslint';
-import type { LinterOptions } from 'stylelint';
+import type { LinterOptions } from 'stylelint/types/stylelint';
 
 import type { Schema } from '../schema';
 import { join, resolve, normalize } from 'path';

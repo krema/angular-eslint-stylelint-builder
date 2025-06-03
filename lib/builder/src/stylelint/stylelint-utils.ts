@@ -1,6 +1,6 @@
 import type { ESLint } from 'eslint';
 import type stylelint from 'stylelint';
-import type { LinterResult } from 'stylelint';
+import type { LinterResult } from 'stylelint/types/stylelint';
 
 export async function loadStylelint(): Promise<typeof stylelint> {
   try {

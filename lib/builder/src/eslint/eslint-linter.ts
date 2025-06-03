@@ -35,15 +35,12 @@ export async function createESlintInstance(workspaceRoot: string, options: Schem
   const configPath = options.eslintConfig ? resolve(workspaceRoot, options.eslintConfig) : undefined;
 
   const eslintOptions: ESLint.Options = {
-    useEslintrc: !options.noEslintrc,
+    // Removed: useEslintrc, ignorePath, resolvePluginsRelativeTo, rulePaths
     overrideConfigFile: configPath,
-    ignorePath: options.eslintIgnorePath || undefined,
     fix: !!options.fix,
     cache: !!options.eslintCache,
-    cacheLocation: options.eslintCacheLocation || undefined,
-    cacheStrategy: options.eslintCacheStrategy || undefined,
-    resolvePluginsRelativeTo: options.eslintResolvePluginsRelativeTo || undefined,
-    rulePaths: options.eslintRulesDir || [],
+    cacheLocation: options.eslintCacheLocation ?? undefined,
+    cacheStrategy: options.eslintCacheStrategy ?? undefined,
     /**
      * Default is `true` and if not overridden the eslint.lintFiles() method will throw an error
      * when no target files are found.
