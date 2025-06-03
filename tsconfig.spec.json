@@ -1,7 +1,8 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "types": ["node", "jest"]
+    "types": ["node", "jest"],
+    "outDir": "dist"
   },
   "files": ["node_modules/jest-extended/types/index.d.ts"],
   "include": [
