@@ -11,6 +11,9 @@ importers:
       '@angular-devkit/architect':
         specifier: ^0.2000.0
         version: 0.2000.0
+      '@eslint/js':
+        specifier: ^9.28.0
+        version: 9.28.0
       '@semantic-release/changelog':
         specifier: ^6.0.2
         version: 6.0.3(semantic-release@24.2.5(typescript@5.8.3))

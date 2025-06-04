@@ -6,7 +6,7 @@ import { createESlintInstance } from './eslint/eslint-linter';
 import { report } from './eslint/reporter';
 
 export async function builder(options: Schema, context: BuilderContext): Promise<BuilderOutput> {
-  const projectName = context?.target?.project || '<???>';
+  const projectName = context?.target?.project ?? '<???>';
   const printInfo = options.format && !options.silent;
 
   if (printInfo) {

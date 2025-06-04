@@ -13,8 +13,22 @@ jobs:
   build:
     strategy:
       matrix:
-        angular-version: [9, 10, 11, 12, 13, 14, 15]
-        os: [ubuntu-latest, windows-latest]
+        include:
+          - angular-version: 16
+            node-version: 18
+            os: ubuntu-latest
+          - angular-version: 17
+            node-version: 18
+            os: ubuntu-latest
+          - angular-version: 18
+            node-version: 20
+            os: ubuntu-latest
+          - angular-version: 19
+            node-version: 20
+            os: ubuntu-latest
+          - angular-version: 20
+            node-version: 22
+            os: ubuntu-latest
 
     runs-on: ${{ matrix.os }}
     defaults:
@@ -31,7 +45,7 @@ jobs:
     - name: 🏗 Setup node version
       uses: actions/setup-node@v3
       with:
-        node-version: 18
+        node-version: ${{ matrix.node-version }}
         cache: 'pnpm'
     - run: |
            pnpm install --frozen-lockfile
@@ -71,10 +85,20 @@ jobs:
 
     - name: 🚁 Move test & config files into Angular Project Version ${{ matrix.angular-version }}
       run: |
-           cp test/.eslintrc* tmp/angular${{ matrix.angular-version }}
-           cp test/.stylelintrc* tmp/angular${{ matrix.angular-version }}
+           cp test/eslint.config.js tmp/angular${{ matrix.angular-version }}
+           cp test/stylelint.config.js tmp/angular${{ matrix.angular-version }}
            rm -rf tmp/angular${{ matrix.angular-version }}/src/app/*
            cp test/src/* tmp/angular${{ matrix.angular-version }}/src/app
+           cd tmp/angular${{ matrix.angular-version }}/src/app
+           for f in *.ts.bak; do mv -- "$f" "${f%.bak}"; done
+           for f in *.css.bak; do mv -- "$f" "${f%.bak}"; done
+           cd -
+
+    - name: 🛠️ Patch package.json for ESM in Angular <= 17
+      if: ${{ matrix.angular-version <= 17 }}
+      run: |
+        cd tmp/angular${{ matrix.angular-version }}
+        jq '. + {"type": "module"}' package.json > package.json.tmp && mv package.json.tmp package.json
 
     - name: 🚀 Run Linter in Angular Project Version ${{ matrix.angular-version }}
       run: |
@@ -83,7 +107,7 @@ jobs:
            pnpm exec ng lint > result.txt
            set -e
            cat result.txt
-           grep -Fx "✖ 5 problems (5 errors, 0 warnings)" result.txt && echo "SUCCESS=1" >> $GITHUB_ENV || echo "SUCCESS=0" >> $GITHUB_ENV
+           grep -Fx "✖ 15 problems (15 errors, 0 warnings)" result.txt && echo "SUCCESS=1" >> $GITHUB_ENV || echo "SUCCESS=0" >> $GITHUB_ENV
 
     - name: Assert result
       if: ${{ env.SUCCESS != 1 }}

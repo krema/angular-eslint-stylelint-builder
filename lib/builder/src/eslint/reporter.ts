@@ -31,7 +31,7 @@ export async function report(
    * "no results" case differently.
    */
   const formatter = await eslintInstance.loadFormatter(options.format);
-  const formattedResults = formatter.format(finalLintResults.lintResults);
+  const formattedResults = await formatter.format(finalLintResults.lintResults);
   const printInfo = options.format && !options.silent;
   const maxWarnings = options.maxWarnings;
   const reportOnlyErrors = options.quiet;

@@ -14,7 +14,7 @@
     "declaration": true,
     "stripInternal": true,
     "skipLibCheck": true,
-    "outDir": "dist",
+    "outDir": "out/dist",
     "noImplicitAny": false,
     "typeRoots": ["node_modules/@types"],
     "emitDecoratorMetadata": true,

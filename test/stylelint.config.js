@@ -12,4 +12,5 @@ export default {
     'no-extra-semicolons': true,
     'length-zero-no-unit': true,
   },
+  "allowEmptyInput": true
 };

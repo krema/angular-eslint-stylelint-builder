@@ -1,4 +1,3 @@
-
 # Angular ESLint + Stylelint Linter
 
 [![npm version](https://badge.fury.io/js/@krema%2Fangular-eslint-stylelint-builder.svg)](https://badge.fury.io/js/@krema%2Fangular-eslint-stylelint-builder) ![node workflow](https://github.com/krema/angular-eslint-stylelint-builder/actions/workflows/integration-test.yml/badge.svg) ![node workflow](https://github.com/krema/angular-eslint-stylelint-builder/actions/workflows/unit-test.yml/badge.svg) ![angular versions](https://img.shields.io/badge/angular-v9--v15-%2523DD0031.svg?flat-square&logo=angular&labelColor=ff0000&color=grey)
@@ -160,41 +159,22 @@ You can configure the following options:
     <td colspan="5"><b>File Enumeration:</b></td>
   </tr>
   <tr>
-    <td>eslintIgnorePath</td>
-    <td></td>
+    <td>eslintIgnorePatterns</td>
+    <td>[]</td>
     <td>
-      A path to a file containing patterns describing files to ignore instead of
-      $CWD/.eslintignore
+      Array of glob patterns describing files to ignore (replaces <code>eslintIgnorePath</code> and <code>.eslintignore</code> in ESLint 9+)
     </td>
     <td></td>
     <td>eslint</td>
   </tr>
   <tr>
-    <td>stylelintIgnorePath</td>
-    <td></td>
+    <td>stylelintIgnorePatterns</td>
+    <td>[]</td>
     <td>
-      A path to a file containing patterns describing files to ignore instead of
-      $CWD/.stylelintignore
+      Array of glob patterns describing files to ignore (replaces <code>stylelintIgnorePath</code> and <code>.stylelintignore</code> in Stylelint 16+)
     </td>
     <td></td>
     <td>stylelint</td>
-  </tr>
-  <tr>
-    <td>eslintRulesDir</td>
-    <td>[]</td>
-    <td>
-      This option allows you to specify another directory from which to load
-      rules files
-    </td>
-    <td></td>
-    <td>eslint</td>
-  </tr>
-  <tr>
-    <td>eslintResolvePluginsRelativeTo</td>
-    <td></td>
-    <td>Changes the folder where plugins are resolved from</td>
-    <td></td>
-    <td>eslint</td>
   </tr>
   <tr>
     <td colspan="5"><b>Output:</b></td>

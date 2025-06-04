@@ -35,7 +35,6 @@ export async function createESlintInstance(workspaceRoot: string, options: Schem
   const configPath = options.eslintConfig ? resolve(workspaceRoot, options.eslintConfig) : undefined;
 
   const eslintOptions: ESLint.Options = {
-    // Removed: useEslintrc, ignorePath, resolvePluginsRelativeTo, rulePaths
     overrideConfigFile: configPath,
     fix: !!options.fix,
     cache: !!options.eslintCache,
@@ -49,6 +48,7 @@ export async function createESlintInstance(workspaceRoot: string, options: Schem
      * a project and therefore doesn't necessarily have matching files, for example.
      */
     errorOnUnmatchedPattern: false,
+    ignorePatterns: options.eslintIgnorePatterns ?? [],
   };
 
   const projectESLint = await loadESLint();
