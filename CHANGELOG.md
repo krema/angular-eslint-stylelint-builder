@@ -1,3 +1,16 @@
+# [1.5.0](https://github.com/krema/angular-eslint-stylelint-builder/compare/v1.4.0...v1.5.0) (2025-06-04)
+
+
+### Bug Fixes
+
+* rename .releaserc.js to .releaserc.cjs for semantic-release compatibility ([c8e20e3](https://github.com/krema/angular-eslint-stylelint-builder/commit/c8e20e36d69112075d889be815b16c5059e18345))
+
+
+### Features
+
+* **deps:** migrate ESLint and Stylelint configurations to new formats ([4112b6c](https://github.com/krema/angular-eslint-stylelint-builder/commit/4112b6c43cefdfe749e3a1fc2080e7b69d1905a5))
+* **deps:** update ESLint and Stylelint configurations, add support for Angular 16+, and improve builder options ([f608f8d](https://github.com/krema/angular-eslint-stylelint-builder/commit/f608f8d7cce78fe9a8054439cef1947c8885c5d5))
+
 # [1.4.0](https://github.com/krema/angular-eslint-stylelint-builder/compare/v1.3.0...v1.4.0) (2023-03-05)
 
 
