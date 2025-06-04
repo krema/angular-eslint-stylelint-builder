@@ -1,10 +1,7 @@
-// eslint.config.js - Flat config format for ESLint 9+
-import { FlatCompat } from "@eslint/eslintrc";
-
-const compat = new FlatCompat();
+import js from "@eslint/js";
 
 export default [
-  ...compat.extends("eslint:recommended"),
+  js.configs.recommended,
   {
     rules: {
       "no-else-return": "error",
@@ -17,8 +14,6 @@ export default [
     linterOptions: {
       reportUnusedDisableDirectives: true
     },
-    env: {
-      es6: true
-    }
+    files: ["**/*.ts"],
   }
 ];

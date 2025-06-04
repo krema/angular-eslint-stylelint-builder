@@ -1,6 +1,6 @@
 import type { JsonObject } from '@angular-devkit/core';
 
-export type BuilderOptions = typeof Schema & JsonObject;
+export type BuilderOptions = Schema & JsonObject;
 
 export interface Schema {
   eslintFilePatterns: string[];
@@ -14,10 +14,8 @@ export interface Schema {
   eslintCacheLocation: string | null;
   stylelintCacheLocation: string | null;
   eslintCacheStrategy: 'content' | 'metadata' | null;
-  eslintIgnorePath: string | null;
-  stylelintIgnorePath: string | null;
-  eslintRulesDir: string[];
-  eslintResolvePluginsRelativeTo: string | null;
+  eslintIgnorePatterns?: string[];
+  stylelintIgnorePatterns?: string[];
   outputFile: string | null;
   format: Formatter;
   silent: boolean;

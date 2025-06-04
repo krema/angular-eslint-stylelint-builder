@@ -8,9 +8,7 @@
       "type": "array",
       "description": "One or more files/dirs/globs to pass directly to ESLint's lintFiles() method. i.e. [\"src/**/*.ts\"]",
       "default": [],
-      "items": {
-        "type": "string"
-      }
+      "items": { "type": "string" }
     },
     "eslintConfig": {
       "type": "string",
@@ -20,9 +18,7 @@
       "type": "array",
       "description": "One or more files/dirs/globs to pass directly to stylelint's lint() method. [\"src/**/*.scss\"]",
       "default": [],
-      "items": {
-        "type": "string"
-      }
+      "items": { "type": "string" }
     },
     "stylelintConfig": {
       "type": "string",
@@ -57,25 +53,15 @@
       "default": "metadata",
       "enum": ["metadata", "content"]
     },
-    "eslintIgnorePath": {
-      "type": "string",
-      "description": "A path to a file containing patterns describing files to ignore instead of $CWD/.eslintignore"
-    },
-    "stylelintIgnorePath": {
-      "type": "string",
-      "description": "A path to a file containing patterns describing files to ignore instead of $CWD/.stylelintignore"
-    },
-    "eslintRulesDir": {
+    "eslintIgnorePatterns": {
       "type": "array",
-      "description": "This option allows you to specify another directory from which to load rules files",
-      "default": [],
-      "items": {
-        "type": "string"
-      }
+      "items": { "type": "string" },
+      "description": "Array of glob patterns describing files to ignore for ESLint."
     },
-    "eslintResolvePluginsRelativeTo": {
-      "type": "string",
-      "description": "Changes the folder where plugins are resolved from"
+    "stylelintIgnorePatterns": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Array of glob patterns describing files to ignore for Stylelint."
     },
     "outputFile": {
       "type": "string",
@@ -125,7 +111,6 @@
       "description": "Succeeds even if there was linting errors.",
       "default": false
     },
-
     "noEslintrc": {
       "type": "boolean",
       "description": "Disables use of configuration from .eslintrc.* and package.json files",

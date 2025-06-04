@@ -16,7 +16,7 @@ export function convertToLintResult(stylelintResults: LinterResult): ESLint.Lint
     result =>
       ({
         errorCount: result.warnings.length,
-        filePath: result.source,
+        filePath: result.source ?? '',
         fixableErrorCount: 0,
         fixableWarningCount: 0,
         usedDeprecatedRules: [],
@@ -28,6 +28,8 @@ export function convertToLintResult(stylelintResults: LinterResult): ESLint.Lint
           ruleId: `stylelint\t${warning.rule}`,
           severity: warning.severity === 'error' ? 2 : 1,
         })),
-      } as ESLint.LintResult)
+        suppressedMessages: [],
+        fatalErrorCount: 0,
+      }) satisfies ESLint.LintResult
   );
 }

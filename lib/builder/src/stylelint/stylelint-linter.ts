@@ -18,9 +18,9 @@ export async function lint(context: BuilderContext, options: Schema): Promise<ES
 
   const stylelintOptions: LinterOptions = {
     cache: !!options.stylelintCache,
-    cacheLocation: options.stylelintCacheLocation || undefined,
+    cacheLocation: options.stylelintCacheLocation ?? undefined,
     fix: !!options.fix,
-    ignorePath: options.stylelintIgnorePath || undefined,
+    ignorePattern: options.stylelintIgnorePatterns ?? [],
     maxWarnings: options.maxWarnings,
     configFile: configPath,
     files: options.stylelintFilePatterns?.map(p => normalize(join(workspaceRoot, p)).replace(/\\/g, '/')) || [],

@@ -1,4 +1,5 @@
 import { toArray, map } from 'rxjs/operators';
+import { lastValueFrom } from 'rxjs';
 
 import { Architect } from '@angular-devkit/architect';
 import { TestingArchitectHost } from '@angular-devkit/architect/testing';
@@ -42,18 +43,30 @@ describe('Lint', () => {
     ]);
   });
 
+  // Normalize file paths in logger output for CI compatibility
+  function normalizePaths(str: string): string {
+    return str
+      .replace(
+        /\/home\/runner\/work\/angular-eslint-stylelint-builder\/angular-eslint-stylelint-builder\//g,
+        '/<ROOT>/'
+      )
+      .replace(/\/workspaces\/angular-eslint-stylelint-builder\//g, '/<ROOT>/');
+  }
+
   it('has created the correct linting results', async () => {
     // A "run" can have multiple outputs, and contains progress information.
     const run = await architect.scheduleBuilder(
       '@krema/angular-eslint-stylelint-builder:lint',
       {
         eslintFilePatterns: ['src/**/*.ts'],
+        eslintConfig: 'eslint.config.js',
         stylelintFilePatterns: ['src/**/*.css'],
+        stylelintConfig: 'stylelint.config.js',
       },
       { logger: logger }
     );
-    const loggerPromise = logger
-      .pipe(
+    const loggerPromise = lastValueFrom(
+      logger.pipe(
         toArray(),
         map(messages =>
           messages.map(y => {
@@ -62,7 +75,7 @@ describe('Lint', () => {
           })
         )
       )
-      .toPromise();
+    );
 
     // The "result" member (of type BuilderOutput) is the next output.
     await run.result;
@@ -73,8 +86,15 @@ describe('Lint', () => {
     await run.stop();
     logger.complete();
 
-    console.log('ACTUAL LOGGER OUTPUT:', JSON.stringify(await loggerPromise, null, 2));
-    expect(loggerPromise).resolves.toEqual([
+    const normalizedLoggerPromise = loggerPromise.then(messages =>
+      messages.map(({ level, message }) => ({
+        level,
+        message: typeof message === 'string' ? normalizePaths(message) : message,
+      }))
+    );
+
+    console.log('ACTUAL LOGGER OUTPUT:', JSON.stringify(await normalizedLoggerPromise, null, 2));
+    expect(normalizedLoggerPromise).resolves.toEqual([
       {
         level: 'info',
         message: '\nLinting "<???>"...',
@@ -90,11 +110,9 @@ describe('Lint', () => {
       {
         level: 'info',
         message:
-          '\n' +
-          '/workspaces/angular-eslint-stylelint-builder/test/src/autofixable.ts\n' +
+          '\n/<ROOT>/test/src/autofixable.ts\n' +
           "  8:10  error  Unnecessary 'else' after 'return'  eslint\tno-else-return\n" +
-          '\n' +
-          '/workspaces/angular-eslint-stylelint-builder/test/src/file.css\n' +
+          '\n/<ROOT>/test/src/file.css\n' +
           '   1:1   error  Unknown rule number-leading-zero                                              stylelint\tnumber-leading-zero\n' +
           '   1:1   error  Unknown rule string-quotes                                                    stylelint\tstring-quotes\n' +
           '   1:1   error  Unknown rule no-extra-semicolons                                              stylelint\tno-extra-semicolons\n' +
@@ -108,11 +126,9 @@ describe('Lint', () => {
           '   8:3   error  Unexpected unknown property "font-weigth" (property-no-unknown)               stylelint\tproperty-no-unknown\n' +
           '  19:1   error  Unexpected unknown type selector "foo" (selector-type-no-unknown)             stylelint\tselector-type-no-unknown\n' +
           '  12:13  error  Unexpected unknown unit "pixels" (unit-no-unknown)                            stylelint\tunit-no-unknown\n' +
-          '\n' +
-          '/workspaces/angular-eslint-stylelint-builder/test/src/file.ts\n' +
+          '\n/<ROOT>/test/src/file.ts\n' +
           "  3:3  error  Unexpected 'debugger' statement  eslint\tno-debugger\n" +
-          '\n' +
-          '✖ 15 problems (15 errors, 0 warnings)\n  1 error and 0 warnings potentially fixable with the `--fix` option.\n',
+          '\n✖ 15 problems (15 errors, 0 warnings)\n  1 error and 0 warnings potentially fixable with the `--fix` option.\n',
       },
       {
         level: 'error',
@@ -127,13 +143,15 @@ describe('Lint', () => {
       '@krema/angular-eslint-stylelint-builder:lint',
       {
         eslintFilePatterns: ['src/**/*.ts'],
-        stylelintFilePatterns: ['src/**/*.css'],
+        eslintConfig: 'eslint.config.js',
         fix: true,
+        stylelintFilePatterns: ['src/**/*.css'],
+        stylelintConfig: 'stylelint.config.js',
       },
       { logger }
     );
-    const loggerPromise = logger
-      .pipe(
+    const loggerPromise = lastValueFrom(
+      logger.pipe(
         toArray(),
         map(messages =>
           messages.map(y => {
@@ -142,14 +160,20 @@ describe('Lint', () => {
           })
         )
       )
-      .toPromise();
+    );
 
     await run.result;
     await run.stop();
     logger.complete();
 
-    // After autofix, expect all stylelint errors to remain (since most are not autofixable)
-    expect(loggerPromise).resolves.toEqual([
+    const normalizedLoggerPromise = loggerPromise.then(messages =>
+      messages.map(({ level, message }) => ({
+        level,
+        message: typeof message === 'string' ? normalizePaths(message) : message,
+      }))
+    );
+
+    expect(normalizedLoggerPromise).resolves.toEqual([
       {
         level: 'info',
         message: '\nLinting "<???>"...',
@@ -165,8 +189,7 @@ describe('Lint', () => {
       {
         level: 'info',
         message:
-          '\n' +
-          '/workspaces/angular-eslint-stylelint-builder/test/src/file.css\n' +
+          '\n/<ROOT>/test/src/file.css\n' +
           '   1:1   error  Unknown rule number-leading-zero                                              stylelint\tnumber-leading-zero\n' +
           '   1:1   error  Unknown rule string-quotes                                                    stylelint\tstring-quotes\n' +
           '   1:1   error  Unknown rule no-extra-semicolons                                              stylelint\tno-extra-semicolons\n' +
@@ -177,16 +200,47 @@ describe('Lint', () => {
           '   8:3   error  Unexpected unknown property "font-weigth" (property-no-unknown)               stylelint\tproperty-no-unknown\n' +
           '  19:1   error  Unexpected unknown type selector "foo" (selector-type-no-unknown)             stylelint\tselector-type-no-unknown\n' +
           '  12:13  error  Unexpected unknown unit "pixels" (unit-no-unknown)                            stylelint\tunit-no-unknown\n' +
-          '\n' +
-          '/workspaces/angular-eslint-stylelint-builder/test/src/file.ts\n' +
+          '\n/<ROOT>/test/src/file.ts\n' +
           "  3:3  error  Unexpected 'debugger' statement  eslint\tno-debugger\n" +
-          '\n' +
-          '✖ 11 problems (11 errors, 0 warnings)\n',
+          '\n✖ 11 problems (11 errors, 0 warnings)\n',
       },
       {
         level: 'error',
         message: 'Lint errors found in the listed files.\n',
       },
     ]);
+  });
+
+  it('ignores files matching eslintIgnorePatterns and stylelintIgnorePatterns', async () => {
+    const run = await architect.scheduleBuilder(
+      '@krema/angular-eslint-stylelint-builder:lint',
+      {
+        eslintFilePatterns: ['src/**/*.ts'],
+        stylelintFilePatterns: ['src/**/*.css'],
+        eslintIgnorePatterns: ['**/file.ts'],
+        stylelintIgnorePatterns: ['**/file.css'],
+        stylelintConfig: 'stylelint.config.js',
+      },
+      { logger }
+    );
+    const loggerPromise = lastValueFrom(
+      logger.pipe(
+        toArray(),
+        map(messages =>
+          messages.map(y => {
+            return { level: y.level, message: y.message };
+          })
+        )
+      )
+    );
+
+    await run.result;
+    await run.stop();
+    logger.complete();
+
+    // The output should not mention file.ts or file.css
+    const output = JSON.stringify(await loggerPromise);
+    expect(output).not.toContain('file.ts');
+    expect(output).not.toContain('file.css');
   });
 });
