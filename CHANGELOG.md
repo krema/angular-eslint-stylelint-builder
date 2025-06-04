@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/krema/angular-eslint-stylelint-builder/compare/v1.5.0...v2.0.0) (2025-06-04)
+
+
+### Features
+
+* support Angular v16–v20 and Stylelint 16 ([4a9fd92](https://github.com/krema/angular-eslint-stylelint-builder/commit/4a9fd92dcd719068405684d64c93b37cf4143e66))
+
+
+### BREAKING CHANGES
+
+* This release drops support for Angular versions below v16 and Stylelint versions below 16. The package now requires Angular v16–v20 and Stylelint 16 or newer.
+
 # [1.5.0](https://github.com/krema/angular-eslint-stylelint-builder/compare/v1.4.0...v1.5.0) (2025-06-04)
 
 
