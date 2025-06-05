@@ -1,6 +1,6 @@
 # Angular ESLint + Stylelint Builder
 
-[![npm version](https://badge.fury.io/js/@krema%2Fangular-eslint-stylelint-builder.svg)](https://badge.fury.io/js/@krema/angular-eslint-stylelint-builder)
+[![npm version](https://badge.fury.io/js/@krema%2Fangular-eslint-stylelint-builder.svg?icon=si%3Anpm)](https://badge.fury.io/js/@krema%2Fangular-eslint-stylelint-builder)
 ![integration test](https://github.com/krema/angular-eslint-stylelint-builder/actions/workflows/integration-test.yml/badge.svg)
 ![unit test](https://github.com/krema/angular-eslint-stylelint-builder/actions/workflows/unit-test.yml/badge.svg)
 
