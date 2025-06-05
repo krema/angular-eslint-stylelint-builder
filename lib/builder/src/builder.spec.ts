@@ -5,6 +5,7 @@ import { Architect } from '@angular-devkit/architect';
 import { TestingArchitectHost } from '@angular-devkit/architect/testing';
 import { logging, schema } from '@angular-devkit/core';
 import * as path from 'path';
+import * as fs from 'fs/promises';
 
 describe('Lint', () => {
   let architect: Architect;
@@ -12,7 +13,6 @@ describe('Lint', () => {
   let logger: logging.Logger;
 
   beforeEach(async () => {
-    const fs = await import('fs/promises');
     await fs.copyFile('test/src/autofixable.ts.bak', 'test/src/autofixable.ts');
     await fs.copyFile('test/src/file.ts.bak', 'test/src/file.ts');
     await fs.copyFile('test/src/file.css.bak', 'test/src/file.css');
@@ -34,12 +34,12 @@ describe('Lint', () => {
   });
 
   afterEach(async () => {
-    const fs = await import('fs/promises');
     // Remove test files but keep the .bak files
     await Promise.all([
       fs.rm('test/src/autofixable.ts', { force: true }),
       fs.rm('test/src/file.ts', { force: true }),
       fs.rm('test/src/file.css', { force: true }),
+      fs.rm('test/lint-report.txt', { force: true }),
     ]);
   });
 
@@ -242,5 +242,40 @@ describe('Lint', () => {
     const output = JSON.stringify(await loggerPromise);
     expect(output).not.toContain('file.ts');
     expect(output).not.toContain('file.css');
+  });
+
+  it('writes JSON output to file with fix enabled', async () => {
+    const outputFile = 'lint-report.txt';
+
+    const run = await architect.scheduleBuilder(
+      '@krema/angular-eslint-stylelint-builder:lint',
+      {
+        eslintFilePatterns: ['src/**/*.ts'],
+        stylelintFilePatterns: ['src/**/*.css'],
+        fix: true,
+        outputFile,
+        format: 'json',
+        eslintConfig: 'eslint.config.js',
+        stylelintConfig: 'stylelint.config.js',
+      },
+      { logger }
+    );
+    await run.result;
+    await run.stop();
+    logger.complete();
+
+    // Check that the output file exists and contains valid JSON
+    let exists = false;
+    try {
+      await fs.access(path.join('test', outputFile));
+      exists = true;
+    } catch {
+      exists = false;
+    }
+    expect(exists).toBe(true);
+    if (exists) {
+      const content = await fs.readFile(path.join('test', outputFile), 'utf8');
+      expect(() => JSON.parse(content)).not.toThrow();
+    }
   });
 });

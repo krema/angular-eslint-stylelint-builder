@@ -3,11 +3,11 @@ import { mkdirSync, statSync } from 'fs';
 
 export function createDirectory(directoryPath: string): void {
   const parentPath = dirname(directoryPath);
-  if (!directoryExists(parentPath)) {
+  if (!directoryExists(parentPath) && parentPath !== directoryPath) {
     createDirectory(parentPath);
   }
   if (!directoryExists(directoryPath)) {
-    mkdirSync(directoryPath);
+    mkdirSync(directoryPath, { recursive: true });
   }
 }
 

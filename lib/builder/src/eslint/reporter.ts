@@ -42,7 +42,11 @@ export async function report(
   if (options.outputFile) {
     const pathToOutputFile = join(workspaceRoot, options.outputFile);
     createDirectory(dirname(pathToOutputFile));
-    writeFileSync(pathToOutputFile, formattedResults);
+    try {
+      writeFileSync(pathToOutputFile, formattedResults || '');
+    } catch (err) {
+      context.logger.error(`[DEBUG] Failed to write output file: ${err}`);
+    }
   } else {
     context.logger.info(formattedResults);
   }
