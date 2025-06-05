@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/krema/angular-eslint-stylelint-builder/compare/v2.0.1...v2.0.2) (2025-06-05)
+
+
+### Bug Fixes
+
+* update npm version badge in README for consistency ([13982a3](https://github.com/krema/angular-eslint-stylelint-builder/commit/13982a3febbca22d6d5a1a3469d4bec9cc6d2796))
+
 ## [2.0.1](https://github.com/krema/angular-eslint-stylelint-builder/compare/v2.0.0...v2.0.1) (2025-06-05)
 
 
