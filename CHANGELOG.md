@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/krema/angular-eslint-stylelint-builder/compare/v2.0.0...v2.0.1) (2025-06-05)
+
+
+### Bug Fixes
+
+* improve file handling and error logging in linting process ([cf347b1](https://github.com/krema/angular-eslint-stylelint-builder/commit/cf347b13de971f758d6517dec0ed464c12d606f6))
+
 # [2.0.0](https://github.com/krema/angular-eslint-stylelint-builder/compare/v1.5.0...v2.0.0) (2025-06-04)
 
 
