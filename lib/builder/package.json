@@ -27,8 +27,8 @@
     "@angular-devkit/architect": ">= 0.901.15",
     "@angular-devkit/core": ">= 9.1.15",
     "@angular/cli": ">= 9.1.15",
-    "eslint": "*",
-    "stylelint": "*",
+    "eslint": ">=9.0.0",
+    "stylelint": ">=16.0.0",
     "typescript": "*"
   }
 }

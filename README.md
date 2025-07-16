@@ -10,8 +10,8 @@ A unified Angular CLI builder for linting Angular projects with [ESLint](https:/
 
 ## Version Compatibility
 
-- **< 2.0.0**: Supports Angular **v9 – v16** and **Stylelint ≤ 15**
-- **>= 2.0.0**: Supports Angular **v17 – v20** and **Stylelint 16+**
+- **v1.x**: Supports Angular **9–16**, Stylelint **≤15**, and ESLint **≤8**
+- **v2.x and above**: Supports Angular **17+**, Stylelint **16+**, and ESLint **9+**
 
 ---
 
