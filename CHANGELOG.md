@@ -1,3 +1,11 @@
+## [2.0.3](https://github.com/krema/angular-eslint-stylelint-builder/compare/v2.0.2...v2.0.3) (2025-07-16)
+
+
+### Bug Fixes
+
+* counting of stylelint warnings/errors ([2271238](https://github.com/krema/angular-eslint-stylelint-builder/commit/227123865b5e2e9ddbfa44c84ae4ee11fbefd562))
+* update version compatibility and peer dependencies in README and package.json ([89c2222](https://github.com/krema/angular-eslint-stylelint-builder/commit/89c222283adbe31844a08147709e345bb721e0b4))
+
 ## [2.0.2](https://github.com/krema/angular-eslint-stylelint-builder/compare/v2.0.1...v2.0.2) (2025-06-05)
 
 
