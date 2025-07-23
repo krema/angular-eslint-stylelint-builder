@@ -12,14 +12,9 @@ permissions:
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         include:
-          - angular-version: 16
-            node-version: 18
-            os: ubuntu-latest
-          - angular-version: 17
-            node-version: 18
-            os: ubuntu-latest
           - angular-version: 18
             node-version: 20
             os: ubuntu-latest

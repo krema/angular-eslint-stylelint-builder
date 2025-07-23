@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     "baseUrl": "tsconfig",
-    "moduleResolution": "node",
-    "module": "commonjs",
-    "target": "es2015",
-    "lib": ["es2018", "dom"],
+    "moduleResolution": "node16",
+    "module": "node16",
+    "target": "es2022",
+    "lib": ["ES2022", "dom"],
     "strict": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
@@ -24,6 +24,7 @@
     "noImplicitThis": true,
     "noUnusedParameters": false,
     "noUnusedLocals": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "isolatedModules": true
   }
 }

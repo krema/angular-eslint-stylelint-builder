@@ -6,6 +6,9 @@ import prettierPlugin from "eslint-plugin-prettier";
 import unusedImportsPlugin from "eslint-plugin-unused-imports";
 
 export default [
+  {
+    ignores: ["example/**"],
+  },
   js.configs.recommended,
   {
     files: ["**/*.ts"],
