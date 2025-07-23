@@ -1,11 +1,12 @@
 import type { BuilderContext } from '@angular-devkit/architect';
 import type { ESLint } from 'eslint';
-import type { LinterOptions } from 'stylelint/types/stylelint';
+import { type LinterOptions } from 'stylelint';
+import stylelint from 'stylelint';
 
 import type { Schema } from '../schema';
 import { join, resolve, normalize } from 'path';
 
-import { convertToLintResult, loadStylelint } from './stylelint-utils';
+import { convertToLintResult } from './stylelint-utils';
 
 export async function lint(context: BuilderContext, options: Schema): Promise<ESLint.LintResult[]> {
   const workspaceRoot = context.workspaceRoot;
@@ -30,7 +31,6 @@ export async function lint(context: BuilderContext, options: Schema): Promise<ES
     return [];
   }
 
-  const stylelint = await loadStylelint();
   const stylelintResults = await stylelint.lint(stylelintOptions);
 
   const lintResults = convertToLintResult(stylelintResults);

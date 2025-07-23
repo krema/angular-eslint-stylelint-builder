@@ -1,15 +1,5 @@
 import type { ESLint } from 'eslint';
-import type stylelint from 'stylelint';
-import type { LinterResult } from 'stylelint/types/stylelint';
-
-export async function loadStylelint(): Promise<typeof stylelint> {
-  try {
-    //@ts-ignore
-    return await import('stylelint');
-  } catch {
-    throw new Error('Unable to find stylelint. Ensure stylelint is installed.');
-  }
-}
+import { type LinterResult } from 'stylelint';
 
 export function convertToLintResult(stylelintResults: LinterResult): ESLint.LintResult[] {
   return stylelintResults.results.map(
