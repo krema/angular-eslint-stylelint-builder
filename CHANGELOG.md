@@ -1,3 +1,25 @@
+# [3.0.0](https://github.com/krema/angular-eslint-stylelint-builder/compare/v2.0.3...v3.0.0) (2025-07-25)
+
+
+### Features
+
+* **stylelint:** migrate to ESM for Stylelint to remove CommonJS API usage ([b531925](https://github.com/krema/angular-eslint-stylelint-builder/commit/b5319254e6404369ad260113df017353baeec6c7))
+
+
+### BREAKING CHANGES
+
+* **stylelint:** The CommonJS Node.js API for Stylelint has been deprecated and will be removed in the next major release. This commit updates `@krema/angular-eslint-stylelint-builder` and related configurations to utilize Stylelint's ECMAScript Modules (ESM) API.
+
+Plugin authors or users of `stylelint.lint()` directly within their projects may need to adjust their imports or configurations to use ESM. Custom syntaxes and formatters are not affected.
+
+The previous `DeprecationWarning: The CommonJS Node.js API is deprecated` message on `ng lint` will no longer appear.
+
+See Stylelint migration guide: https://stylelint.io/migration-guide/to-16
+
+chore(test): convert to vitest
+
+ci(actions): disable fail fast
+
 ## [2.0.3](https://github.com/krema/angular-eslint-stylelint-builder/compare/v2.0.2...v2.0.3) (2025-07-16)
 
 
