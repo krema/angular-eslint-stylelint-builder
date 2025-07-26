@@ -1,3 +1,10 @@
+## [3.0.2](https://github.com/krema/angular-eslint-stylelint-builder/compare/v3.0.1...v3.0.2) (2025-07-26)
+
+
+### Bug Fixes
+
+* **deps:** correct Angular peerDependencies ranges ([5e17307](https://github.com/krema/angular-eslint-stylelint-builder/commit/5e17307a6dd6757c9a207d7d0c754686f339cce0))
+
 ## [3.0.1](https://github.com/krema/angular-eslint-stylelint-builder/compare/v3.0.0...v3.0.1) (2025-07-26)
 
 
