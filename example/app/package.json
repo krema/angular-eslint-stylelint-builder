@@ -37,7 +37,7 @@
     "@angular/build": "^20.1.2",
     "@angular/cli": "^20.1.2",
     "@angular/compiler-cli": "^20.1.0",
-    "@krema/angular-eslint-stylelint-builder": "file:///../../out",
+    "@krema/angular-eslint-stylelint-builder": ">=3.0.0",
     "@types/jasmine": "~5.1.0",
     "@typescript-eslint/eslint-plugin": "^8.38.0",
     "@typescript-eslint/parser": "^8.38.0",

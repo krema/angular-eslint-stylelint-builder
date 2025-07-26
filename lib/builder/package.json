@@ -34,9 +34,9 @@
     "builders.json"
   ],
   "peerDependencies": {
-    "@angular-devkit/architect": ">= 0.901.15",
-    "@angular-devkit/core": ">= 9.1.15",
-    "@angular/cli": ">= 9.1.15",
+    "@angular-devkit/architect": ">=0.1900.0",
+    "@angular-devkit/core": ">=19.0.0",
+    "@angular/cli": ">=19.0.0",
     "eslint": ">=9.0.0",
     "stylelint": ">=16.0.0",
     "typescript": "*"
