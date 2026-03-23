@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@angular-devkit/architect": "^0.2102.3",
-    "@eslint/js": "^9.39.3",
+    "@eslint/js": "^9.39.4",
     "@semantic-release/changelog": "^6.0.2",
     "@semantic-release/git": "^10.0.1",
     "@types/jest": "^29.4.0",
