@@ -15,7 +15,7 @@ jobs:
 
     steps:
     - name: Install pnpm
-      run: npm install -g pnpm
+      run: npm install -g pnpm@10
 
     - name: ⤵️ Check out code from GitHub
       uses: actions/checkout@v3

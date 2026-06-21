@@ -45,13 +45,32 @@ describe('Lint', () => {
 
   // Normalize file paths in logger output for CI compatibility
   function normalizePaths(str: string): string {
+    const cwdPattern = new RegExp(`${process.cwd().replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}/`, 'g');
+
     return str
+      .replace(cwdPattern, '/<ROOT>/')
       .replace(
         /\/home\/runner\/work\/angular-eslint-stylelint-builder\/angular-eslint-stylelint-builder\//g,
         '/<ROOT>/'
       )
       .replace(/\/workspaces\/angular-eslint-stylelint-builder\//g, '/<ROOT>/');
   }
+
+  it('publishes entrypoints that match the build output', async () => {
+    const packageJson = JSON.parse(await fs.readFile('out/package.json', 'utf8'));
+    const mainExport = packageJson.exports['.'];
+
+    expect(mainExport).toEqual({
+      types: './dist/index.d.ts',
+      import: './dist/index.js',
+    });
+
+    await expect(fs.access(path.join('out', packageJson.main))).resolves.toBeUndefined();
+    await expect(fs.access(path.join('out', packageJson.module))).resolves.toBeUndefined();
+    await expect(fs.access(path.join('out', packageJson.types))).resolves.toBeUndefined();
+    await expect(fs.access(path.join('out', mainExport.types))).resolves.toBeUndefined();
+    await expect(fs.access(path.join('out', mainExport.import))).resolves.toBeUndefined();
+  });
 
   it('has created the correct linting results', async () => {
     // A "run" can have multiple outputs, and contains progress information.
@@ -94,7 +113,7 @@ describe('Lint', () => {
     );
 
     console.log('ACTUAL LOGGER OUTPUT:', JSON.stringify(await normalizedLoggerPromise, null, 2));
-    expect(normalizedLoggerPromise).resolves.toEqual([
+    await expect(normalizedLoggerPromise).resolves.toEqual([
       {
         level: 'info',
         message: '\nLinting "<???>"...',
@@ -173,7 +192,7 @@ describe('Lint', () => {
       }))
     );
 
-    expect(normalizedLoggerPromise).resolves.toEqual([
+    await expect(normalizedLoggerPromise).resolves.toEqual([
       {
         level: 'info',
         message: '\nLinting "<???>"...',
